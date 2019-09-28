@@ -1,0 +1,17 @@
+﻿.container.login-form {
+    /*Move to the middle of the screen*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    max-width: 576px;
+    height: auto;
+    text-align: center;
+}
+
+.login {
+    background-image: url(../image/login-page.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -13,45 +13,14 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SmartMaintenance</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - SmartMaintenance - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-
+    <link rel="stylesheet" href="~/css/shared.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -70,8 +39,136 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
 
-    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/alertify/alertify.min.js" type="text/javascript"></script>
+    <link href="~/lib/alertify/alertify.min.css" rel="stylesheet">
+    <link href="~/lib/alertify/default.css" rel="stylesheet">
+
+    <!--
+    <script>
+        $(document).ready(function () {
+            //SetActiveClass("@(ViewContext.RouteData.Values["Controller"])");
+
+            //Get the value of controller
+            if ("@(ViewContext.RouteData.Values["Controller"])" == "Home")
+            {
+                console.log("yes");
+            }
+
+            //Get the value of Action for the controller
+            console.log("@(ViewContext.RouteData.Values["Action"])");
+            */
+        });
+    </script>
+        -->
+
+    <script>
+            //will only run once the page Document Object Model (DOM) is ready for JavaScript code to execute.
+            $(document).ready(function () {
+
+            // Remove the class active from id navigator and class list-group-item list-group-item-action bg-dark
+             $("#navigator").find("a.list-group-item list-group-item-action bg-dark").removeClass("active");
+            // Add active class accordingly to the controller
+            $('#@(ViewContext.RouteData.Values["Controller"])').addClass('active');
+
+        });
+    </script>
+    <!--Do not render section Chart in Graph&Chart Index.cshtml-->
+    @RenderSection("Chart", required: false)
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-dark border-right border-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading">MyIndustry4IR</div>
+            <div id="navigator" class="list-group list-group-flush">
+                <!--To do: Add Icon-->
+                <a id="Home" href="Home" class="list-group-item list-group-item-action bg-dark">Home</a>
+                <a id="GraphNChart" href="GraphNChart" class="list-group-item list-group-item-action bg-dark">Graph & Chart</a>
+                <a id="Analysis" data-alias="Some Alias Here" href="Analysis" class="list-group-item list-group-item-action bg-dark">Analysis</a>
+                <a id="Messages" href="Messages" class="list-group-item list-group-item-action bg-dark )">Messages</a>
+                <a data-alias="Some Alias Here" href="#" class="list-group-item list-group-item-action bg-dark">About</a>
+                <a data-alias="Some Alias Here" href="#" class="list-group-item list-group-item-action bg-dark">Backup</a>
+                <!--Not working in production-->
+
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-dark border-bottom" id="nvbar_mobile">
+                <!-- Still not mobile friendly http://howbigismybrowser.com/ 995x736-->
+                <div class="navbar-nav mr-auto">
+                    <button class="btn btn-primary" id="menu-toggle"><i id="icon-toggle" class="fa fa-bars"></i></button>
+                </div>
+                <!--<span class="navbar-brand navbar_text">@ViewData["Title"]</span>-->
+                <!--if u want to use MVC tag helper, must use <a>...</a> attribute-->
+                <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+
+                <!--
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                -->
+            </nav>
+            <div class="container-fluid">
+                <!-- mt= margin top in bootstrap-->
+                <div class="mt-4">
+                    <h1 class="mt-4">@ViewBag.Header</h1>
+                    <!-- Create a partial view to prompt the user to accept the cookies and privacy concern
+                <partial name="_CookieConsentPartial" />-->
+
+                    @RenderBody()
+                </div>
+
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+        <!-- Bootstrap core JavaScript -->
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+            </script>
+        </environment>
+        <script src="~/js/shared.js" asp-append-version="true"></script>
+    </div>
 </body>
 </html>
