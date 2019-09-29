@@ -12,6 +12,7 @@ using SmartMaintenance.Models;
 
 namespace SmartMaintenance.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -25,7 +26,6 @@ namespace SmartMaintenance.Controllers
 
 
         //[Authorize]
-        [Authorize(Roles = "Manager")]
         public ViewResult Index() => View(userManager.Users);
 
         //Without Authorize, U can get in anonymously

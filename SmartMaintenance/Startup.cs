@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmartMaintenance.Helpers;
 using SmartMaintenance.Models;
 
 namespace SmartMaintenance
@@ -51,6 +52,21 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                //https://stackoverflow.com/questions/49770491/session-variable-value-is-getting-null-in-asp-net-core
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddMemoryCache();
+            services.AddSession();
+
+            // configure strongly typed settings objects
+            // To initialise to take the data in appsettings.json
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -72,6 +88,7 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSession();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

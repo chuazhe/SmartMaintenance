@@ -30,7 +30,11 @@ const uri = "https://localhost:44376/";
 let todos = null;
 
 $(document).ready(function () {
-    getData();
+    var value = $("#JWT").data('value');
+    console.log(value);
+
+    //alert("hello");
+    //getData();
     //postData();
     //getDataById(13);
 });

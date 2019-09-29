@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartMaintenance.Models;
 
 namespace SmartMaintenance.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
@@ -20,8 +22,10 @@ namespace SmartMaintenance.Controllers
             roleManager = roleMgr;
             userManager = userMrg;
         }
+
         public ViewResult Index() => View(roleManager.Roles);
         public IActionResult Create() => View();
+
         [HttpPost]
         public async Task<IActionResult> Create([Required]string name)
         {
@@ -40,6 +44,7 @@ namespace SmartMaintenance.Controllers
             }
             return View(name);
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {

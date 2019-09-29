@@ -46,6 +46,7 @@
     <link href="~/lib/alertify/alertify.min.css" rel="stylesheet">
     <link href="~/lib/alertify/default.css" rel="stylesheet">
 
+
     <!--
     <script>
         $(document).ready(function () {
@@ -133,11 +134,12 @@
                 -->
             </nav>
             <div class="container-fluid">
+                <input type="hidden" id="JWT" data-value=@HttpContextAccessor.HttpContext.Session.GetString("JWT"); />
                 <!-- mt= margin top in bootstrap-->
                 <div class="mt-4">
                     <h1 class="mt-4">@ViewBag.Header</h1>
                     <!-- Create a partial view to prompt the user to accept the cookies and privacy concern
-                <partial name="_CookieConsentPartial" />-->
+        <partial name="_CookieConsentPartial" />-->
 
                     @RenderBody()
                 </div>

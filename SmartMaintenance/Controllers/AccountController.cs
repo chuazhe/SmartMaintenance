@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using SmartMaintenance.Helpers;
 using SmartMaintenance.Models;
 
 namespace SmartMaintenance.Controllers
 {
+    // 1 authorize for all the function under this class, except for those who has [AllowAnonymous]
+    
     public class AccountController : Controller
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
+        private readonly AppSettings _appSettings;
 
         //Constructor
         public AccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signinMgr)
+        SignInManager<AppUser> signinMgr, IOptions<AppSettings> appSettings)
         {
             userManager = userMgr;
             signInManager = signinMgr;
+            _appSettings = appSettings.Value;
         }
 
         // allows unauthenticated users to log into the application
@@ -37,6 +47,7 @@ namespace SmartMaintenance.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+            HttpContext.Session.SetString("JWT", "XXX");
             return RedirectToAction("Index", "Home");
         }
 
@@ -66,6 +77,28 @@ namespace SmartMaintenance.Controllers
 
                     if (result.Succeeded)
                     {
+
+                        var payload = new LoginModel
+                        {
+                            Email = details.Email,
+                            Password = details.Password,
+                        };
+
+                        using (var httpClient = new HttpClient())
+                        {
+                            StringContent content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+
+                            string test = _appSettings.WebApiUri + "api/account/login";
+                            Console.WriteLine(test);
+                            using (var response = await httpClient.PostAsync(_appSettings.WebApiUri+ "api/account/login", content))
+                            {
+                                string apiResponse = await response.Content.ReadAsStringAsync();
+                                Console.WriteLine(apiResponse);
+                                HttpContext.Session.SetString("JWT", apiResponse);
+
+                            }
+                        }
+
                         //If login success, store the email to the session variable
                         //HttpContext.Session.SetString("SessionEmail", details.Email);           
                         // redirect the user to the returnUrl location if it is true and if it is false, add a validation error and redisplay the Login view to the user so they can try again.
