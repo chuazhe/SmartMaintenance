@@ -93,6 +93,17 @@
                 <a id="Messages" href="Messages" class="list-group-item list-group-item-action bg-dark )">Messages</a>
                 <a data-alias="Some Alias Here" href="#" class="list-group-item list-group-item-action bg-dark">About</a>
                 <a data-alias="Some Alias Here" href="#" class="list-group-item list-group-item-action bg-dark">Backup</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a id="Home" href="Home" class="list-group-item list-group-item-action bg-dark">Admin</a>
+                    }
+                    else
+                    {
+                        <a id="Home" href="Home" class="list-group-item list-group-item-action bg-dark">XAdmin</a>
+                    }
+                }
                 <!--Not working in production-->
 
             </div>
@@ -134,7 +145,7 @@
                 -->
             </nav>
             <div class="container-fluid">
-                <input type="hidden" id="JWT" data-value=@HttpContextAccessor.HttpContext.Session.GetString("JWT"); />
+                <input type="hidden" id="JWT" data-value=@HttpContextAccessor.HttpContext.Session.GetString("JWT") />
                 <!-- mt= margin top in bootstrap-->
                 <div class="mt-4">
                     <h1 class="mt-4">@ViewBag.Header</h1>

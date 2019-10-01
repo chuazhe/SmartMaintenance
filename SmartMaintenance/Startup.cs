@@ -52,6 +52,20 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
 
+            /*
+            //Seting the Account Login page  
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings  
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login  
+                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout  
+                options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied  
+                options.SlidingExpiration = true;
+            });
+            */
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 //https://stackoverflow.com/questions/49770491/session-variable-value-is-getting-null-in-asp-net-core

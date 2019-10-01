@@ -23,15 +23,17 @@ $.ajax({
 // Cloud Webiste for Web Api
 //const uri = "https://myindustry4irwebapi.azurewebsites.net/";
 //Local Host for Web Api
-const uri = "https://localhost:44376/";
+const uri = "http://localhost:4000/";
 // Local Host for Application
 //const uri = "https://localhost:44393/";
 
 let todos = null;
+var value =null;
 
 $(document).ready(function () {
-    var value = $("#JWT").data('value');
+    value = $("#JWT").data('value');
     console.log(value);
+    getData2();
 
     //alert("hello");
     //getData();
@@ -79,6 +81,28 @@ function postData() {
         }
     });
 };
+
+//with authotise header
+function getData2() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/values",
+        contentType: "application/json",
+        headers: {
+            'Authorization': "Bearer "+value
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            console.log(result);
+        }
+    });
+};
+
 
 function getDataById(id) {
     $.ajax({
