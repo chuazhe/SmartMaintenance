@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmartMaintenance.Helpers;
+using SmartMaintenance.Models;
 
 namespace SmartMaintenance
 {
@@ -31,6 +35,52 @@ namespace SmartMaintenance
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<AppIdentityDbContext>(options =>
+options.UseSqlServer(
+Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
+
+            //used the AddIdentity method to set up the Identity services using the built-in classes to represent users and roles.
+            services.AddIdentity<AppUser, IdentityRole>(opts => {
+                opts.User.RequireUniqueEmail = true;
+                //opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
+                //opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            })
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
+            /*
+            //Seting the Account Login page  
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings  
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login  
+                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout  
+                options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied  
+                options.SlidingExpiration = true;
+            });
+            */
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                //https://stackoverflow.com/questions/49770491/session-variable-value-is-getting-null-in-asp-net-core
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddMemoryCache();
+            services.AddSession();
+
+            // configure strongly typed settings objects
+            // To initialise to take the data in appsettings.json
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -51,6 +101,8 @@ namespace SmartMaintenance
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseSession();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

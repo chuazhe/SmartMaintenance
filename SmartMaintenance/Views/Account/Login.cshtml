@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+@model LoginModel
+
+    <!--e /Account/Login URL, which is the default URL for providing authentication
+    credentials. If want to change the default login url, search for CHANGING THE LOGIN URL on page 932-->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login - SmartMaintenance</title>
+
+        <!--If it is development-->
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        </environment>
+        <!--If it is not development-->
+        <environment exclude="Development">
+            <!--fallback is The URL of a CSS stylesheet to fallback to in the case the primary one fails.-->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+                  crossorigin="anonymous"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        </environment>
+        <link rel="stylesheet" href="~/css/login.css" />
+    </head>
+    <body class="login">
+        <div class="container login-form border border-primary rounded">
+            <div class="row">
+                <div class="col"><h1>SmartMaintenance</h1></div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col">
+                    <form asp-action="Login" method="post">
+                        <!-- hidden type let web developers include data that cannot be seen or modified by users when a form is submitted.-->
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                        <div class="form-group">
+                            <input asp-for="Email" class="form-control" placeholder="Email" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit" >Log In</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-danger" asp-validation-summary="All"></div>
+            </div>
+            <div class="row">
+                <div class="col">Made by Chua Wei Zhe</div>
+            </div>
+        </div>
+
+    </body>
