@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">@(ViewContext.RouteData.Values["Id"])
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/part/manual/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-hand-paper" id="predictManual"></i><br/>Manual</a>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/part/auto/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-robot" id="predictAuto"></i><br/>Auto (Demo or Sensor)</button>
+    </div>
+
+</div>

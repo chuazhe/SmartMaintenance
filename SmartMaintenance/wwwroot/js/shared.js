@@ -1,5 +1,8 @@
-﻿/*Menu Toggle Script*/
+﻿
+const web = "https://localhost:44300/";
+const uri = "http://localhost:4000/";
 
+/*Menu Toggle Script*/
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -19,6 +22,13 @@ $("#menu-toggle").click(function (e) {
 function SetActiveClass(className) {
     console.log(className);
 }
+
+function TableClickable() {
+    $(".table-row").click(function () {
+        window.document.location = $(this).data("href");
+    });
+};
+
 
 
 //Menu Click Script
