@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Create Purchase Order";
+}
+
+<script src="~/js/createorder.js" type="text/javascript"></script>
+
+
+<!-- Example single danger button -->
+<span class="input-group-text">Item description:</span>
+
+<div class="row">
+    <div class="col-5">
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="drop" href="#">Select Part<span class="caret"></span></a>
+            <ul class="dropdown-menu" id="SelectPartName"></ul>
+        </div>
+    </div>
+    <div class="col-5">
+        Test
+    </div>
+    <div class="col-2">
+        Test 2
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-5">
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="drop" href="#">Select Part<span class="caret"></span></a>
+            <ul class="dropdown-menu" id="SelectPartName2"></ul>
+        </div>
+    </div>
+    <div class="col-5">
+        Test
+    </div>
+    <div class="col-2">
+        Test 2
+    </div>
+</div>
+
+<!--
+<div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Comments</span>
+    </div>
+    <textarea class="form-control" aria-label="With textarea"></textarea>
+</div>
+-->
+
+<button type="submit" class="btn btn-primary" onclick="Test()">Show</button>
+
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Action
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+</div>

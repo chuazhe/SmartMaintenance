@@ -1,16 +1,16 @@
 ﻿$(document).ready(function ($) {
 
-    getPlan();
+    getOrder();
 
 });
 
-function getPlan() {
+function getOrder() {
 
-    $("#tablePlan").show();
+    $("#tableOrder").show();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/Maintenance",
+        url: uri + "api/Order",
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -20,16 +20,24 @@ function getPlan() {
         },
         success: function (data) {
             var tr;
+            var approve;
             //console.log(data);
 
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<tr class=table-row data-href=" + web + "Plan/details/" + data[i].maintenanceId + ">";
-                tr = tr + "<td>" + data[i].maintenanceId + "</td>";
-                tr = tr + "<td>" + data[i].aircraftId + "</td>";
-                tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
+                if (data[i].orderApprove == 0) {
+                    approve = "No";
+                }
+                else {
+                    approve = "Yes";
+                }
+            
+                tr = tr + "<tr class=table-row data-href=" + web + "Order/details/" + data[i].orderId + ">";
+                tr = tr + "<td>" + data[i].orderId + "</td>";
+                tr = tr + "<td>" + data[i].orderDate + "</td>";
+                tr = tr + "<td>" + approve + "</td>";
 
             }
-            $('#tablePlan').append(tr);
+            $('#tableOrder').append(tr);
             TableClickable();
 
             /*
@@ -42,3 +50,5 @@ function getPlan() {
         }
     })
 };
+
+

@@ -33,6 +33,10 @@ var value =null;
 $(document).ready(function () {
     value = $("#JWT").data('value');
     console.log(value);
+    getAircraftCount();
+    getAircraftMaintenanceCount();
+    getMaintenancePlanCount();
+    getOrderCount();
     //getData2();
     //sendNotification();
     //alert("hello");
@@ -42,7 +46,128 @@ $(document).ready(function () {
 });
 
 
+function AddPart() {
+    $.ajax({
+        type: "PUT",
+        url: uri + "api/part/add/1001",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+            alertify.error("error");
+
+        },
+        success: function (data) {
+            console.log(data);
+            alertify.success("success");
+
+
+
+        }
+    })
+};
+
+function getAircraftCount() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/aircraft",
+        cache: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+
+            var j = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].aircraftStatus == 1) {
+                    j++;
+                }
+
+
+            }
+            document.getElementById("AircraftCount").innerHTML = j;
+
+
+        }
+    })
+};
+
+function getAircraftMaintenanceCount() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/aircraft",
+        cache: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            var j = 0;
+            
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].aircraftStatus == 0) {
+                    j++;
+                }
+
+            }
+            document.getElementById("AircraftMaintenanceCount").innerHTML = j;
+
+
+        }
+    })
+};
+
+function getMaintenancePlanCount() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/Maintenance",
+        cache: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            document.getElementById("PlanCount").innerHTML = data.length;
+
+        }
+    })
+};
+
+function getOrderCount() {
+    var i = 0;
+    $.ajax({
+        type: "GET",
+        url: uri + "api/order",
+        cache: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            document.getElementById("OrderCount").innerHTML = data.length;
+
+
+        }
+    })
+};
+
+
+
 function getData() {
+
+    var i = 0;
+
     $.ajax({
         type: "GET",
         url: uri +"api/testtable",
@@ -55,14 +180,13 @@ function getData() {
         },
         success: function (data) {
             $.each(data, function (key, item) {
-                console.log(key);
-                console.log(item);
-                todos = data;
-            });
-        }
-    })
-};
+                i++;
 
+            });
+            console.log(i);
+        }
+    });
+};
 
 function postData() {
     $.ajax({

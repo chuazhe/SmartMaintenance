@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartMaintenance.Models;
 using System.Web;
+using Hangfire;
 
 namespace SmartMaintenance.Controllers
 {
@@ -19,6 +20,12 @@ namespace SmartMaintenance.Controllers
         {
 
             //Post("fcm","body","");
+
+            
+            BackgroundJob.Schedule(() => Debug.WriteLine("Hello world from Hangfire!"),
+    TimeSpan.FromSeconds(10));
+    
+
             return View();
             
         }

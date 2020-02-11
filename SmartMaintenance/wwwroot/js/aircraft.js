@@ -22,12 +22,21 @@ function getAircraft() {
         },
         success: function (data) {
             var tr;
+            var status;
+
             console.log(data);
 
             for (var i = 0; i < data.length; i++) {
+                if (data[i].aircraftStatus == 0) {
+                    status = "In Maintenance";
+                }
+                else {
+                    status = "In Service";
+                }
                 tr = tr + "<tr class=table-row data-href="+web+"aircraft/details/"+data[i].aircraftId+">";
                 tr = tr + "<td>" + data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].aircraftName + "</td>";
+                tr = tr + "<td>" + status + "</td>";
             }
             $('#tableAircraft').append(tr);
             TableClickable();

@@ -1,14 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Purchase";
+    ViewData["Title"] = "Purchase Order";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Purchase</h1>
-</div>
 
-<div class="input-group">
-    <div class="input-group-prepend">
-        <span class="input-group-text">Comments</span>
-    </div>
-    <textarea class="form-control" aria-label="With textarea"></textarea>
+<script src="~/js/order.js" type="text/javascript"></script>
+
+<div class="container-fluid">
+    <a class="col-4 btn btn-primary" style="margin:20px 0px 20px 0px;" href="https://localhost:44300/purchase/create">Create New Purchase Order</a>
+
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrder" style="display:none;">
+        <tr><th>Order Id</th><th>Order Date</th><th>Approved?</th></tr>
+    </table>
 </div>

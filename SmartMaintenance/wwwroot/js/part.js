@@ -1,6 +1,4 @@
-﻿//Local Host for Web Api
-
-$(document).ready(function ($) {
+﻿$(document).ready(function ($) {
 
     getPart();
 
