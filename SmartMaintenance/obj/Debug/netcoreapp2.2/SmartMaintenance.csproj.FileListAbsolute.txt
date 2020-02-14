@@ -44,3 +44,4 @@ C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreap
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\SmartMaintenance.dll
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\SmartMaintenance.pdb
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\SmartMaintenance.csproj.CopyComplete
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\SmartMaintenance.csprojAssemblyReference.cache

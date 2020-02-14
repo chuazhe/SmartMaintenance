@@ -28,8 +28,6 @@ function getApproveOrder() {
                     tr = tr + "<td>" + data[i].orderId + "</td>";
                     tr = tr + "<td>" + data[i].orderDate + "</td>";
                 }
-
-
             }
             $('#tableApproveOrder').append(tr);
             TableClickable();

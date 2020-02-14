@@ -93,31 +93,35 @@
     });
 });
 
-function createPurchaseOrder() {
+
+function createMaintenancePlan() {
 
     var str = $('#dropdown').text();
     var res = str.substring(0, 4);
     if (isNaN(res)) {
         res = null;
-    } 
+    }
 
     var str2 = $('#dropdown2').text();
     var res2 = str2.substring(0, 4);
     if (isNaN(res2)) {
         res2 = null;
-    } 
+    }
 
     var str3 = $('#dropdown3').text();
     var res3 = str3.substring(0, 4);
     if (isNaN(res3)) {
         res3 = null;
-    } 
+    }
 
     var quantity = $('#quantity').val();
 
     var quantity2 = $('#quantity2').val();
 
     var quantity3 = $('#quantity3').val();
+
+    var id = $('#routeDataId').val();
+    console.log(id);
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -126,24 +130,21 @@ function createPurchaseOrder() {
 
     today = dd + '-' + mm + '-' + yyyy;
 
-    postOrder(today);
+    console.log(today);
 
-    var Id = getTopId();
-    postOrderPart(Id, res, quantity);
-    postOrderPart(Id, res2, quantity2);
-    postOrderPart(Id, res3, quantity3);
-
-
+    var minute = document.getElementById("minute").value;
+    console.log(minute);
 
 }
 
-function postOrder(today) {
+
+function postMaintenance(today) {
     $.ajax({
         type: "POST",
-        url: uri + "api/order/create",
+        url: uri + "api/maintenance/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({"OrderDate":today,"OrderApprove":"0"}),
+        data: JSON.stringify({ "AircraftId": today, "MaintenanceDate": today }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -160,7 +161,7 @@ function getTopId() {
     var topId = 0;
     $.ajax({
         type: "GET",
-        url: uri + "api/order/gettop",
+        url: uri + "api/maintenance/gettop",
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -178,13 +179,13 @@ function getTopId() {
 
 };
 
-function postOrderPart(OrderId,PartId,Count) {
+function postOrderPart(MaintenanceId, PartId, Count) {
     $.ajax({
         type: "POST",
-        url: uri + "api/orderpart/create",
+        url: uri + "api/maintenancepart/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "OrderId": OrderId, "PartId": PartId, "Quantity": Count }),
+        data: JSON.stringify({ "MaintenanceId": MaintenanceId, "PartId": PartId, "Quantity": Count }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -197,11 +198,9 @@ function postOrderPart(OrderId,PartId,Count) {
     });
 };
 
-
-
 function getPartName() {
 
-    var items="";
+    var items = "";
 
     $.ajax({
         type: "GET",
@@ -216,7 +215,7 @@ function getPartName() {
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i].partName);
-                items += "<li class='dropdown-item'><a >"+ data[i].partId +" "+data[i].partName+"</a ></li>";  
+                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + data[i].partName + "</a ></li>";
                 //console.log(items);
 
             }
@@ -230,7 +229,6 @@ function getPartName() {
         }
     })
 };
-
 
 function setDropdown() {
     $(".dropdown-menu li a").click(function (e) {

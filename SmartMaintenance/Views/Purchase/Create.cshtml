@@ -11,30 +11,72 @@
 <div class="row">
     <div class="col-5">
         <div class="btn-group">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="drop" href="#">Select Part<span class="caret"></span></a>
+            <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
             <ul class="dropdown-menu" id="SelectPartName"></ul>
         </div>
     </div>
-    <div class="col-5">
-        Test
-    </div>
-    <div class="col-2">
-        Test 2
+    <div class="col-lg-2">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-left-minus btn btn-danger btn-number" id="minus" data-type="minus" data-field="">
+                    <span class="fa fa-minus"></span>
+                </button>
+            </span>
+            <input type="text" id="quantity" name="quantity" class="form-control input-number" " value="0" min="0" max="100">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-right-plus btn btn-success btn-number" id="add" data-type="plus" data-field="">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </span>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-5">
         <div class="btn-group">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="drop" href="#">Select Part<span class="caret"></span></a>
+            <a class="btn btn-primary dropdown-toggle" id="dropdown2" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
             <ul class="dropdown-menu" id="SelectPartName2"></ul>
         </div>
     </div>
-    <div class="col-5">
-        Test
+    <div class="col-lg-2">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-left-minus second btn btn-danger btn-number" id="minusSecond" data-type="minus" data-field="">
+                    <span class="fa fa-minus"></span>
+                </button>
+            </span>
+            <input type="text" id="quantity2" name="quantity2" class="form-control input-number" value="0" min="0" max="100">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-right-plus second btn btn-success btn-number" id="addSecond" data-type="plus" data-field="">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </span>
+        </div>
     </div>
-    <div class="col-2">
-        Test 2
+</div>
+
+<div class="row">
+    <div class="col-5">
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown3" href="#">Select Part<span class="caret"></span></a>
+            <ul class="dropdown-menu" id="SelectPartName3"></ul>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-left-minus second btn btn-danger btn-number" id="minusThird" data-type="minus" data-field="">
+                    <span class="fa fa-minus"></span>
+                </button>
+            </span>
+            <input type="text" id="quantity3" name="quantity3" class="form-control input-number" value="0" min="0" max="100">
+            <span class="input-group-btn">
+                <button type="button" class="quantity-right-plus second btn btn-success btn-number" id="addThird" data-type="plus" data-field="">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </span>
+        </div>
     </div>
 </div>
 
@@ -47,18 +89,4 @@
 </div>
 -->
 
-<button type="submit" class="btn btn-primary" onclick="Test()">Show</button>
-
-
-<div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Action
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-</div>
+<button type="submit" class="btn btn-primary" onclick="createPurchaseOrder()">Create Purchase Order</button>
