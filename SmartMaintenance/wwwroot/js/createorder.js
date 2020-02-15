@@ -134,7 +134,6 @@ function createPurchaseOrder() {
     postOrderPart(Id, res3, quantity3);
 
 
-
 }
 
 function postOrder(today) {

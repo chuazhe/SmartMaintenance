@@ -23,14 +23,14 @@ function getPart() {
             //console.log(data);
 
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<tr class=table-row data-href=" + web + "part/details/" + data[i].partId + ">";
+                tr = tr + "<tr class=table-row>";
                 tr = tr + "<td>" + data[i].partId + "</td>";
                 tr = tr + "<td>" + data[i].partName + "</td>";
                 tr = tr + "<td>" + data[i].partCount + "</td>";
 
             }
             $('#tablePart').append(tr);
-            TableClickable();
+            //TableClickable();
 
             /*
             $.each(data, function (key, item) {

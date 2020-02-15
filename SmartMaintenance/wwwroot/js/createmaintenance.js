@@ -94,7 +94,7 @@
 });
 
 
-function createMaintenancePlan() {
+async function createMaintenancePlan() {
 
     var str = $('#dropdown').text();
     var res = str.substring(0, 4);
@@ -121,7 +121,6 @@ function createMaintenancePlan() {
     var quantity3 = $('#quantity3').val();
 
     var id = $('#routeDataId').val();
-    console.log(id);
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -130,21 +129,75 @@ function createMaintenancePlan() {
 
     today = dd + '-' + mm + '-' + yyyy;
 
-    console.log(today);
+    var second = document.getElementById("minute").value;
 
-    var minute = document.getElementById("minute").value;
-    console.log(minute);
+    // Notification
+    //setNoti(second);
+
+    /*
+    console.log(result);
+    console.log(result2);
+    console.log(result3);
+    */
+
+    var result = checkPart(res, quantity);
+    var result2 = checkPart(res2, quantity2);
+    var result3 = checkPart(res3, quantity3);
+
+    if (result && result2 && result3) {
+        postMaintenance(id, today);
+        console.log("All part!");
+        var Id2 = getTopId();
+        postMaintenancePart(Id2, res, quantity);
+        postMaintenancePart(Id2, res2, quantity2);
+        postMaintenancePart(Id2, res3, quantity3);
+    }
+    else {
+        alertify.error("Required Part is missing!");
+    }
 
 }
 
+function setNoti(second) {
+    $.ajax({
+        type: 'GET',
+        // Note the difference in url (this works if you're actually in Index page)
+        url: '/Plan/setNoti',
+        dataType: 'json',
+        data: { second },
+        success: function (data) {
+        },
+        error: function (error) {
+        }
+    })
+}
 
-function postMaintenance(today) {
+function checkPart(id, count) {
+    var result;
+    $.ajax({
+        type: 'GET',
+        url: uri + "api/part/getget",
+        dataType: 'json',
+        async: false,
+        data: { "id":id, "count":count },
+        success: function (data) {
+            result = true;
+        },
+        error: function (error) {
+            result = false;
+        }
+    })
+    return result;
+}
+
+
+function postMaintenance(AircraftId,today) {
     $.ajax({
         type: "POST",
         url: uri + "api/maintenance/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "AircraftId": today, "MaintenanceDate": today }),
+        data: JSON.stringify({ "AircraftId": AircraftId, "MaintenanceDate": today }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -152,7 +205,7 @@ function postMaintenance(today) {
             console.log(errorThrown);
         },
         success: function (result) {
-            console.log("Good!");
+            //console.log("Good!");
         }
     });
 };
@@ -179,13 +232,13 @@ function getTopId() {
 
 };
 
-function postOrderPart(MaintenanceId, PartId, Count) {
+function postMaintenancePart(MaintenanceId, PartId, Count) {
     $.ajax({
         type: "POST",
         url: uri + "api/maintenancepart/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "MaintenanceId": MaintenanceId, "PartId": PartId, "Quantity": Count }),
+        data: JSON.stringify({ "MaintenanceId": MaintenanceId, "PartId": PartId, "PartCount": Count }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -193,7 +246,7 @@ function postOrderPart(MaintenanceId, PartId, Count) {
             console.log(errorThrown);
         },
         success: function (result) {
-            console.log("Good!");
+            //console.log("Good!");
         }
     });
 };
@@ -236,6 +289,6 @@ function setDropdown() {
         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
         var str = selText;
         var res = str.substring(0, 4);
-        console.log(res);
+        //console.log(res);
     });
 }

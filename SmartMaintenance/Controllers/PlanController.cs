@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +27,13 @@ namespace SmartMaintenance.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        // Note the difference in method name
+        public void setNoti(int second)
+        {
+            BackgroundJob.Schedule(() => Debug.WriteLine("Hello world from Hangfire!"),
+TimeSpan.FromSeconds(second));
         }
 
         // POST: Plan/Create
