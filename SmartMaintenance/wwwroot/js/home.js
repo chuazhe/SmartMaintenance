@@ -45,28 +45,6 @@ $(document).ready(function () {
     //getDataById(13);
 });
 
-
-function AddPart() {
-    $.ajax({
-        type: "PUT",
-        url: uri + "api/part/add/1001",
-        cache: false,
-        async: false,
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
-            alertify.error("error");
-
-        },
-        success: function (data) {
-            console.log(data);
-            alertify.success("success");
-
-
-
-        }
-    })
-};
-
 function getAircraftCount() {
     $.ajax({
         type: "GET",

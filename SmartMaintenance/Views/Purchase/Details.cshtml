@@ -7,3 +7,20 @@
         Purchase Order Id: @(ViewContext.RouteData.Values["Id"])
     </h1>
 </div>
+
+<script src="~/js/orderdetail.js"></script>
+
+
+<div class="container-fluid">
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrderDetails" style="display:none;">
+        <tr><th>Order Date</th><th>Approved?</th></tr>
+    </table>
+</div>
+
+<div class="container-fluid">
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrderPart" style="display:none;">
+        <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
+    </table>
+</div>
+
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

@@ -8,6 +8,9 @@
     </h1>
 </div>
 
+<script src="~/js/aircraftdetail.js" type="text/javascript"></script>
+
+
 <div class="row">
     <div class="col-6">
         <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/manual/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-hand-paper" id="predictManual"></i><br />Manual Prediction</a>
@@ -18,13 +21,22 @@
 </div>
 
 <div class="row">
-    <div class="col-4">
+    <div class="col-6">
         <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-user-edit" id="createMaintenancePlan"></i><br />Make Maintenance Plan</a>
     </div>
-    <div class="col-4">
-        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-wrench" id="createMaintenancePlan"></i><br />Change to Maintenance</a>
-    </div>
-    <div class="col-4">
-        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-plane-departure" id="createMaintenancePlan"></i><br />Change to In Service</a>
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-clipboard-check" id="finishMaintenancePlan"></i><br />Finish Maintenance Plan</a>
     </div>
 </div>
+
+<div class="row">
+
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="#" style="margin-top:20px"><i class="fa fa-10x fa-wrench" onclick="changeToMaintenance()"></i><br />Change to Maintenance</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="#" style="margin-top:20px"><i class="fa fa-10x fa-plane-departure" onclick="changeToInService()"></i><br />Change to In Service</a>
+    </div>
+</div>
+
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

@@ -1,6 +1,6 @@
 ﻿function approve() {
 
-    //approveOrder();
+    approveOrder();
     getOrderPart();
 }
 
@@ -27,10 +27,13 @@ function approveOrder() {
 
 function getOrderPart()
 {
+    var id = $('#routeDataId').val();
+
     $.ajax({
         type: "GET",
-        url: uri + "api/orderpart/1015",
+        url: uri + "api/orderpart/getspecific/"+id,
         cache: false,
+        async: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -38,7 +41,7 @@ function getOrderPart()
             console.log(errorThrown);
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             for (var i = 0; i < data.length; i++) {
                 addPart(data[i].partId, data[i].quantity);
             }
@@ -49,15 +52,29 @@ function getOrderPart()
 }
 
 function addPart(PartId, PartCount) {
+    $.ajax({
+        type: "PUT",
+        url: uri + "api/part/add/" + PartId + "/" + PartCount,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
 
-    console.log(PartId);
-    console.log(PartCount);
+        }
+    })
 
 
 }
 
 
 function declineOrder() {
+    alertify.error("Error");
+    /*
     $.ajax({
         type: "GET",
         url: uri + "api/aircraft",
@@ -74,4 +91,5 @@ function declineOrder() {
 
         }
     })
+    */
 };

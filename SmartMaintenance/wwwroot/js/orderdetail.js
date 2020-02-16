@@ -1,18 +1,18 @@
 ﻿$(document).ready(function ($) {
 
-    getMaintenanceDetails();
-    getMaintenancePart();
+    getOrderDetails();
+    getOrderPart();
 });
 
-function getMaintenanceDetails() {
+function getOrderDetails() {
 
     var id = $('#routeDataId').val();
 
-    $("#tableMaintenanceDetails").show();
+    $("#tableOrderDetails").show();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/maintenance/getspecific/"+id,
+        url: uri + "api/order/getspecific/" + id,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -22,27 +22,34 @@ function getMaintenanceDetails() {
         },
         success: function (data) {
             var tr;
-            var status;
+            var approve;
+
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<td>" + data[i].aircraftId + "</td>";
-                tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
+                if (data[i].orderApprove == 0) {
+                    approve = "No";
+                }
+                else {
+                    approve = "Yes";
+                }
+                tr = tr + "<td>" + data[i].orderDate + "</td>";
+                tr = tr + "<td>" + approve + "</td>";
             }
-            $('#tableMaintenanceDetails').append(tr);
+            $('#tableOrderDetails').append(tr);
 
 
         }
     })
 };
 
-function getMaintenancePart() {
+function getOrderPart() {
 
     var id = $('#routeDataId').val();
 
-    $("#tableMaintenancePart").show();
+    $("#tableOrderPart").show();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/maintenancepart/getspecific/" + id,
+        url: uri + "api/orderpart/getspecific/" + id,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -51,16 +58,16 @@ function getMaintenancePart() {
             console.log(errorThrown);
         },
         success: function (data) {
-            //console.log(data);
+            console.log(data);
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
                 tr = tr + "<td>" + data[i].partId + "</td>";
                 var name = getPartName(data[i].partId);
                 tr = tr + "<td>" + name + "</td>";
-                tr = tr + "<td>" + data[i].partCount + "</td>";
+                tr = tr + "<td>" + data[i].quantity + "</td>";
             }
-            $('#tableMaintenancePart').append(tr);
+            $('#tableOrderPart').append(tr);
 
 
         }
@@ -68,10 +75,10 @@ function getMaintenancePart() {
 };
 
 function getPartName(partId) {
-    var name="";
+    var name = "";
     $.ajax({
         type: "GET",
-        url: uri + "api/part/getspecificname/"+partId,
+        url: uri + "api/part/getspecificname/" + partId,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -81,7 +88,7 @@ function getPartName(partId) {
             console.log(errorThrown);
         },
         success: function (data) {
-            //console.log(data);
+            console.log(data);
             name = data;
 
         }
