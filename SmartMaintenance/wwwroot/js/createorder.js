@@ -144,13 +144,9 @@ function postOrder(today) {
         async: false,
         data: JSON.stringify({"OrderDate":today,"OrderApprove":"0"}),
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
         },
         success: function (result) {
-            console.log("Good!");
+            alertify.success("Purchase Order is created!");
         }
     });
 };
@@ -185,13 +181,8 @@ function postOrderPart(OrderId,PartId,Count) {
         async: false,
         data: JSON.stringify({ "OrderId": OrderId, "PartId": PartId, "Quantity": Count }),
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
         },
         success: function (result) {
-            console.log("Good!");
         }
     });
 };

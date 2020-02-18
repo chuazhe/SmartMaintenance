@@ -31,15 +31,20 @@ let todos = null;
 var value = null;
 var service = 0;
 var maintenance = 0;
+var approved = 0;
+var unapproved = 0;
 
 $(document).ready(function () {
-    value = $("#JWT").data('value');
-    console.log(value);
+    //value = $("#JWT").data('value');
+    //console.log(value);
     getAircraftCount();
     getAircraftMaintenanceCount();
     getMaintenancePlanCount();
     getOrderCount();
+    getApproved();
+    getUnApproved();
     setChart();
+    setChart2();
     //getData2();
     //sendNotification();
     //alert("hello");
@@ -80,6 +85,39 @@ function setChart() {
     });
 }
 
+function setChart2() {
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+    data = {
+        datasets: [{
+            data: [approved, unapproved],
+            backgroundColor: [
+                'rgba(253,180,92, 0.5)',
+                'rgba(70,191,189, 0.5)'
+            ]
+
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Approved Purchase Order',
+            'UnApproved Purchase Order',
+        ]
+    };
+
+    var options = {
+
+    };
+
+    var myPieChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: data,
+        options: options
+
+    });
+
+}
+
 function getAircraftCount() {
     $.ajax({
         type: "GET",
@@ -105,6 +143,60 @@ function getAircraftCount() {
             }
             service = j;
             document.getElementById("AircraftCount").innerHTML = j;
+
+
+        }
+    })
+};
+
+function getApproved() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/order/getapproved",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+
+            var j = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                j++;
+
+            }
+            approved = j;
+
+
+        }
+    })
+};
+
+function getUnApproved() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/order/getunapproved",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+
+            var j = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                j++;
+
+            }
+            unapproved = j;
 
 
         }

@@ -129,25 +129,33 @@ async function createMaintenancePlan() {
 
     today = dd + '-' + mm + '-' + yyyy;
 
-    var second = document.getElementById("seconds").value;
+    //var second = document.getElementById("seconds").value;
 
-    // Notification
-    //setNoti();
 
     var result = checkPart(res, quantity);
     var result2 = checkPart(res2, quantity2);
     var result3 = checkPart(res3, quantity3);
 
-    if (result && result2 && result3) {
+    if (result || result2 || result3) {
         postMaintenance(id, today);
-        console.log("All part!");
         var Id2 = getTopId();
         postMaintenancePart(Id2, res, quantity);
         postMaintenancePart(Id2, res2, quantity2);
         postMaintenancePart(Id2, res3, quantity3);
+        // Notification
+        setNoti();
     }
     else {
-        alertify.error("Required Part is missing!");
+        if (!result && res !=null) {
+            alertify.error("Part Id "+res+" is missing!");
+        }
+        if (!result2 && res2 != null) {
+            alertify.error("Part Id " +res2 + " is missing!");
+        }
+        if (!result3 && res3 != null) {
+            alertify.error("Part Id " +res3 + " is missing!");
+        }
+
     }
 
 }
@@ -190,13 +198,13 @@ function postMaintenance(AircraftId,today) {
         async: false,
         data: JSON.stringify({ "AircraftId": AircraftId, "MaintenanceDate": today }),
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
         },
         success: function (result) {
             //console.log("Good!");
+            alertify.success("Maintenance Plan is created!");
         }
     });
 };
@@ -209,7 +217,6 @@ function getTopId() {
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
@@ -231,7 +238,6 @@ function postMaintenancePart(MaintenanceId, PartId, Count) {
         async: false,
         data: JSON.stringify({ "MaintenanceId": MaintenanceId, "PartId": PartId, "PartCount": Count }),
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
@@ -251,7 +257,6 @@ function getPartName() {
         url: uri + "api/part",
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
