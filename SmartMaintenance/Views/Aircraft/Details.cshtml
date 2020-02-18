@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Aircraft Details";
+    ViewData["Title"] = "Aircraft "+ ViewContext.RouteData.Values["Id"];
 }
 
 <div class="text-center">
@@ -16,7 +16,7 @@
         <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/manual/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-hand-paper" id="predictManual"></i><br />Manual Prediction</a>
     </div>
     <div class="col-6">
-        <button class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/auto/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-robot" id="predictAuto"></i><br />Auto Prediction (Demo or Sensor)</button>
+        <button class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/auto/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-robot" id="predictAuto" onclick="autoPredict()"></i><br />Auto Prediction (Demo or Sensor)</button>
     </div>
 </div>
 
@@ -25,7 +25,7 @@
         <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-user-edit" id="createMaintenancePlan"></i><br />Make Maintenance Plan</a>
     </div>
     <div class="col-6">
-        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/create/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-clipboard-check" id="finishMaintenancePlan"></i><br />Finish Maintenance Plan</a>
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/plan/finish/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-clipboard-check" id="finishMaintenancePlan"></i><br />Finish Maintenance Plan</a>
     </div>
 </div>
 

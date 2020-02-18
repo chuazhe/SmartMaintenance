@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SmartMaintenance.Controllers
 {
+    [Authorize]
     public class PlanController : Controller
     {
         // GET: Plan
@@ -29,11 +31,16 @@ namespace SmartMaintenance.Controllers
             return View();
         }
 
-        // Note the difference in method name
-        public void setNoti(int second)
+        // GET: Plan/Create
+        public ActionResult Confirm()
         {
-            BackgroundJob.Schedule(() => Debug.WriteLine("Hello world from Hangfire!"),
-TimeSpan.FromSeconds(second));
+            return View();
+        }
+
+        // GET: Plan/Create
+        public ActionResult Finish()
+        {
+            return View();
         }
 
         // POST: Plan/Create

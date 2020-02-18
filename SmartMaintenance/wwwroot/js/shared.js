@@ -47,3 +47,35 @@ $('.list-group-item').on('click', function () {
     // Pass clicked link element to another function
     //myfunction($this, $alias)
 })*/
+
+function sendNotification(x) {
+    //var x = document.getElementById("msg").value;
+    console.log(x);
+
+    $.ajax({
+        type: "POST",
+        url: uri + "api/notifications/sendnoti",
+        contentType: "application/json",
+        data: JSON.stringify({ "msg": x }),
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            alertify.success("Notification sent!");
+        }
+    });
+};
+
+function checkRUL(RUL, AircraftId) {
+    if (RUL <= 30) {
+        var msg = "Aircraft " + AircraftId + " is predicted to fail!";
+        sendNotification(msg);
+        alertify.error(msg);
+        //sendNotification(msg);
+
+    }
+
+}

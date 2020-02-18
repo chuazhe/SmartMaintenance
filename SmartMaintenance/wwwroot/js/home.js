@@ -28,7 +28,9 @@ $.ajax({
 //const uri = "https://localhost:44393/";
 
 let todos = null;
-var value =null;
+var value = null;
+var service = 0;
+var maintenance = 0;
 
 $(document).ready(function () {
     value = $("#JWT").data('value');
@@ -37,6 +39,7 @@ $(document).ready(function () {
     getAircraftMaintenanceCount();
     getMaintenancePlanCount();
     getOrderCount();
+    setChart();
     //getData2();
     //sendNotification();
     //alert("hello");
@@ -45,11 +48,44 @@ $(document).ready(function () {
     //getDataById(13);
 });
 
+function setChart() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    data = {
+        datasets: [{
+            data: [service, maintenance],
+            backgroundColor: [
+                'rgb(0, 64, 255, 0.5)',
+                'rgba(255, 0, 0, 0.5)'
+            ]
+
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'In Service',
+            'In Maintenance',
+        ]
+    };
+
+    var options = {
+
+    };
+
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: options
+
+    });
+}
+
 function getAircraftCount() {
     $.ajax({
         type: "GET",
         url: uri + "api/aircraft",
         cache: false,
+        async:false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -67,6 +103,7 @@ function getAircraftCount() {
 
 
             }
+            service = j;
             document.getElementById("AircraftCount").innerHTML = j;
 
 
@@ -79,6 +116,7 @@ function getAircraftMaintenanceCount() {
         type: "GET",
         url: uri + "api/aircraft",
         cache: false,
+        async: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -95,6 +133,7 @@ function getAircraftMaintenanceCount() {
                 }
 
             }
+            maintenance = j;
             document.getElementById("AircraftMaintenanceCount").innerHTML = j;
 
 
@@ -180,28 +219,6 @@ function postData() {
         },
         success: function (result) {
             console.log("Good!");
-        }
-    });
-};
-
-function sendNotification() {
-    var x = document.getElementById("msg").value;
-    console.log(x);
-
-    $.ajax({
-        type: "POST",
-        url: uri + "api/notifications/sendnoti",
-        contentType: "application/json",
-        data: JSON.stringify({ "msg": x}),
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (result) {
-            console.log("Good!");
-            console.log(result);
         }
     });
 };

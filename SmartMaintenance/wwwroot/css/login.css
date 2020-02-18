@@ -8,9 +8,16 @@
     max-width: 576px;
     height: auto;
     text-align: center;
+    background-color: #2B3035;
+    /*
+    border-style:solid;
+    border-color:white;
+    border-radius:5px;
+        */
 }
 
 .login {
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: #2B3035;
 }

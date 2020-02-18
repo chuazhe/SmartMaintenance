@@ -129,16 +129,10 @@ async function createMaintenancePlan() {
 
     today = dd + '-' + mm + '-' + yyyy;
 
-    var second = document.getElementById("minute").value;
+    var second = document.getElementById("seconds").value;
 
     // Notification
-    //setNoti(second);
-
-    /*
-    console.log(result);
-    console.log(result2);
-    console.log(result3);
-    */
+    //setNoti();
 
     var result = checkPart(res, quantity);
     var result2 = checkPart(res2, quantity2);
@@ -158,13 +152,10 @@ async function createMaintenancePlan() {
 
 }
 
-function setNoti(second) {
+function setNoti() {
     $.ajax({
-        type: 'GET',
-        // Note the difference in url (this works if you're actually in Index page)
-        url: '/Plan/setNoti',
-        dataType: 'json',
-        data: { second },
+        type: 'POST',
+        url: uri + 'api/notifications/setnoti/' + document.getElementById("seconds").value + "/" + $('#routeDataId').val(),
         success: function (data) {
         },
         error: function (error) {

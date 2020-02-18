@@ -7,3 +7,13 @@
         Maintenance Id: @(ViewContext.RouteData.Values["Id"])
     </h1>
 </div>
+
+<div class="container-fluid">
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableMaintenance" style="display:none; cursor:pointer ">
+        <tr><th>Maintenance Id</th><th>Maintenance Date</th></tr>
+    </table>
+</div>
+
+
+<script src="~/js/finishmaintenance.js" type="text/javascript"></script>
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

@@ -42,3 +42,7 @@ function changeToInService() {
         }
     })
 }
+
+function autoPredict() {
+    checkRUL(29, $('#routeDataId').val());
+}

@@ -19,13 +19,6 @@ namespace SmartMaintenance.Controllers
         public IActionResult Index()
         {
 
-            //Post("fcm","body","");
-
-            
-            BackgroundJob.Schedule(() => Debug.WriteLine("Hello world from Hangfire!"),
-    TimeSpan.FromSeconds(10));
-    
-
             return View();
             
         }

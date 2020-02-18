@@ -1,16 +1,18 @@
 ﻿$(document).ready(function ($) {
 
-    getPlan();
+    var id = $('#routeDataId').val();
+
+    getPlan(id);
 
 });
 
-function getPlan() {
+function getPlan(AircraftId) {
 
-    $("#tablePlan").show();
+    $("#tableMaintenance").show();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/Maintenance",
+        url: uri + "api/Maintenance/getUnused/"+AircraftId,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -20,26 +22,15 @@ function getPlan() {
         },
         success: function (data) {
             var tr;
-            //console.log(data);
+            console.log(data);
 
             for (var i = 0; i < data.length; i++) {
-                var result;
-                if (data[i].maintenanceUsed == 0) {
-                    result = "No";
-                }
-                else {
-                    result = "Yes";
-                }
-
-                tr = tr + "<tr class=table-row data-href=" + web + "Plan/details/" + data[i].maintenanceId + ">";
+                tr = tr + "<tr class=table-row data-href=" + web + "Plan/confirm/" + data[i].maintenanceId + ">";
                 tr = tr + "<td>" + data[i].maintenanceId + "</td>";
-                tr = tr + "<td>" + data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
-                tr = tr + "<td>" + result + "</td>";
-
 
             }
-            $('#tablePlan').append(tr);
+            $('#tableMaintenance').append(tr);
             TableClickable();
 
             /*

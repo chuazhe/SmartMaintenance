@@ -2,7 +2,6 @@
     ViewData["Title"] = "Manual Prediction";
 }
 
-
 <div class="text-center">
     <h1 class="display-4">
         Aircraft Id: @(ViewContext.RouteData.Values["Id"])
@@ -183,5 +182,7 @@
 
 
 </div>
+
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />
 
 <script src="~/js/manual.js" type="text/javascript"></script>
