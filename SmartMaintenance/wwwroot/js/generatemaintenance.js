@@ -1,101 +1,18 @@
 ﻿$(document).ready(function ($) {
 
-    getPartName();
+    //getPartName();
+    console.log(localStorage.getItem("result1"));
+    console.log(localStorage.getItem("result2"));
+    console.log(localStorage.getItem("result3"));
+    console.log(localStorage.getItem("result4"));
 
-    /*
+    if (localStorage.getItem("result1")) {
+        console.log("good");
 
-    $('#add').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity').val());
-
-        // If is not undefined
-
-        $('#quantity').val(quantity + 1);
+    }
 
 
-        // Increment
-
-    });
-
-    $('#minus').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity').val(quantity - 1);
-        }
-    });
-
-    $('#addSecond').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        $('#quantity2').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusSecond').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity2').val(quantity - 1);
-        }
-    });
-
-    $('#addThird').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        $('#quantity3').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusThird').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity3').val(quantity - 1);
-        }
-    });
-    */
 });
-
 
 async function createMaintenancePlan() {
 
@@ -117,11 +34,6 @@ async function createMaintenancePlan() {
         res3 = null;
     }
 
-    var str4 = $('#dropdown4').text();
-    var res4 = str4.substring(0, 4);
-    if (isNaN(res4)) {
-        res4 = null;
-    }
     /*
     var quantity = $('#quantity').val();
 
@@ -169,14 +81,14 @@ async function createMaintenancePlan() {
         setNoti();
     }
     else {
-        if (!result && res !=null) {
-            alertify.error("Part Id "+res+" is missing!");
+        if (!result && res != null) {
+            alertify.error("Part Id " + res + " is missing!");
         }
         if (!result2 && res2 != null) {
-            alertify.error("Part Id " +res2 + " is missing!");
+            alertify.error("Part Id " + res2 + " is missing!");
         }
         if (!result3 && res3 != null) {
-            alertify.error("Part Id " +res3 + " is missing!");
+            alertify.error("Part Id " + res3 + " is missing!");
         }
         if (!result4 && res4 != null) {
             alertify.error("Part Id " + res4 + " is missing!");
@@ -185,6 +97,7 @@ async function createMaintenancePlan() {
     }
 
 }
+
 
 function setNoti() {
     $.ajax({
@@ -204,7 +117,7 @@ function checkPart(id, count) {
         url: uri + "api/part/getget",
         dataType: 'json',
         async: false,
-        data: { "id":id, "count":count },
+        data: { "id": id, "count": count },
         success: function (data) {
             result = true;
         },
@@ -215,8 +128,7 @@ function checkPart(id, count) {
     return result;
 }
 
-
-function postMaintenance(AircraftId,today) {
+function postMaintenance(AircraftId, today) {
     $.ajax({
         type: "POST",
         url: uri + "api/maintenance/create",
@@ -306,13 +218,3 @@ function getPartName() {
         }
     })
 };
-
-function setDropdown() {
-    $(".dropdown-menu li a").click(function (e) {
-        var selText = $(this).text();
-        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-        var str = selText;
-        var res = str.substring(0, 4);
-        //console.log(res);
-    });
-}

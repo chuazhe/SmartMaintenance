@@ -91,6 +91,36 @@
             $('#quantity3').val(quantity - 1);
         }
     });
+
+    $('#addFourth').click(function (e) {
+
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity4').val());
+
+        // If is not undefined
+
+        $('#quantity4').val(quantity + 1);
+
+
+        // Increment
+
+    });
+
+    $('#minusFourth').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity4').val());
+
+        // If is not undefined
+
+        // Increment
+        if (quantity > 0) {
+            $('#quantity4').val(quantity - 1);
+        }
+    });
 });
 
 function createPurchaseOrder() {
@@ -113,11 +143,20 @@ function createPurchaseOrder() {
         res3 = null;
     } 
 
+    var str4 = $('#dropdown4').text();
+    var res4 = str4.substring(0, 4);
+    if (isNaN(res3)) {
+        res3 = null;
+    } 
+
     var quantity = $('#quantity').val();
 
     var quantity2 = $('#quantity2').val();
 
     var quantity3 = $('#quantity3').val();
+
+    var quantity4 = $('#quantity4').val();
+
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -132,6 +171,8 @@ function createPurchaseOrder() {
     postOrderPart(Id, res, quantity);
     postOrderPart(Id, res2, quantity2);
     postOrderPart(Id, res3, quantity3);
+    postOrderPart(Id, res4, quantity4);
+
 
 
 }
@@ -213,6 +254,8 @@ function getPartName() {
             $('#SelectPartName').html(items);
             $('#SelectPartName2').html(items);
             $('#SelectPartName3').html(items);
+            $('#SelectPartName4').html(items);
+
 
 
             setDropdown();

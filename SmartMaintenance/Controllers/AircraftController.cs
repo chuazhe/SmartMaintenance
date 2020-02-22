@@ -41,6 +41,12 @@ namespace SmartMaintenance.Controllers
             return View();
         }
 
+        // GET: Aircraft/Create
+        public ActionResult Generate()
+        {
+            return View();
+        }
+
         // POST: Aircraft/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

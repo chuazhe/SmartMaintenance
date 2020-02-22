@@ -1,4 +1,93 @@
-﻿function makePrediction() {
+﻿
+$(document).ready(function ($) {
+    getAircraftPart();
+
+    localStorage.setItem("result1", 0);
+    localStorage.setItem("result2", 0);
+    localStorage.setItem("result3", 0);
+    localStorage.setItem("result4", 0);
+
+});
+
+
+function generatePlan() {
+
+    console.log(localStorage.getItem("result1"));
+    console.log(localStorage.getItem("result2"));
+    console.log(localStorage.getItem("result3"));
+    console.log(localStorage.getItem("result4"));
+
+    localStorage.result1 = 1;
+
+
+
+
+
+
+}
+
+
+function getPartName(partId) {
+    var name = "";
+    $.ajax({
+        type: "GET",
+        url: uri + "api/part/getspecificname/" + partId,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            //alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            console.log(data);
+            name = data;
+
+        }
+    })
+    return name;
+
+}
+
+function getAircraftPart() {
+
+    var items = "";
+
+    var id = $('#routeDataId').val();
+
+    $("#tableAircraftPart").show();
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/aircraftpart/getspecific/" + id,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            // alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            console.log(data);
+            var tr;
+            for (var i = 0; i < data.length; i++) {
+                var name = getPartName(data[i].partId);
+                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + name + "</a ></li>";
+            }
+
+            $('#SelectPartName').html(items);
+            setDropdown();
+
+
+
+        }
+
+    })
+};
+
+function makePrediction() {
     var setting1 = document.getElementById("setting1").value;
     var setting2 = document.getElementById("setting2").value;
     var setting3 = document.getElementById("setting3").value;
@@ -24,10 +113,28 @@
     var s20 = document.getElementById("s20").value;
     var s21 = document.getElementById("s21").value;
 
+    var str = $('#dropdown').text();
+    var res = str.substring(0, 4);
+    if (isNaN(res)) {
+        res = null;
+    }
 
+    if (res == 1001) {
+        var url = "http://e1bfa688-0391-4596-89db-95e8d12b8f76.southeastasia.azurecontainer.io/score";
 
-    var url = "http://e1bfa688-0391-4596-89db-95e8d12b8f76.southeastasia.azurecontainer.io/score";
+    }
+    else if (res == 1002) {
+        var url = "http://e1bfa688-0391-4596-89db-95e8d12b8f76.southeastasia.azurecontainer.io/score";
 
+    }
+    else if (res == 1003) {
+        var url = "http://e1bfa688-0391-4596-89db-95e8d12b8f76.southeastasia.azurecontainer.io/score";
+
+    }
+    else if (res == 1004) {
+        var url = "http://e1bfa688-0391-4596-89db-95e8d12b8f76.southeastasia.azurecontainer.io/score";
+
+    }
     
     $.ajax({
         type: "GET",
@@ -35,7 +142,7 @@
             "/" + s6 + "/" + s7 + "/" + s8 + "/" + s9 + "/" + s10 + "/" + s11 + "/" + s12 + "/" + s13 + "/" + s14 + "/" + s15 + "/" + s16 + "/" + s17
             + "/" + s18 + "/" + s19 + "/" + s20 + "/" + s21,
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
+            //alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
@@ -47,10 +154,40 @@
             var obj = result.substr(init + 1, fin - init - 1);
             console.log(obj);
             document.getElementById("result").innerHTML = obj;
-            checkRUL(obj, $('#routeDataId').val());
+
+            console.log(res);
+            if (res == 1001) {
+                result1 = 1;
+
+            }
+            else if (res == 1002) {
+                result2 = 1;
+
+            }
+            else if (res == 1003) {
+                result3 = 1;
+
+            }
+            else if (res == 1004) {
+                result4 = 1;
+
+            }
+            //checkRUL(obj, $('#routeDataId').val(),res);
+
+
 
         }
     });
 
 
+}
+
+function setDropdown() {
+    $(".dropdown-menu li a").click(function (e) {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        var str = selText;
+        var res = str.substring(0, 4);
+        //console.log(res);
+    });
 }

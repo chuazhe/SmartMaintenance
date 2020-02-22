@@ -2,6 +2,8 @@
 const web = "https://localhost:44300/";
 const uri = "http://localhost:4000/";
 
+
+
 /*Menu Toggle Script*/
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
@@ -69,9 +71,9 @@ function sendNotification(x) {
     });
 };
 
-function checkRUL(RUL, AircraftId) {
+function checkRUL(RUL, AircraftId, PartId) {
     if (RUL <= 30) {
-        var msg = "Aircraft " + AircraftId + " is predicted to fail!";
+        var msg = PartId+" of Aircraft " + AircraftId + " is predicted to fail!";
         sendNotification(msg);
         alertify.error(msg);
         //sendNotification(msg);
