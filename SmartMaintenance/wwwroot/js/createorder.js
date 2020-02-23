@@ -121,6 +121,31 @@
             $('#quantity4').val(quantity - 1);
         }
     });
+
+
+
+    /*
+    setPartA();
+    setPartB();
+    setPartC();
+    setPartD();
+
+
+    var str6 = $('#dropdown').text();
+    console.log(str6);
+
+    var str7 = $('#dropdown2').text();
+    console.log(str7);
+
+    var str8 = $('#dropdown3').text();
+    console.log(str8);
+
+    var str9 = $('#dropdown4').text();
+    console.log(str9);
+    */
+
+
+
 });
 
 function createPurchaseOrder() {
@@ -238,6 +263,7 @@ function getPartName() {
         type: "GET",
         url: uri + "api/part",
         cache: false,
+        async: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -274,3 +300,36 @@ function setDropdown() {
         console.log(res);
     });
 }
+
+function setPartA() {
+    var selText = "1001 Alpha";
+     $("#SelectPartName.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        var str = selText;
+        var res = str.substring(0, 4);
+        console.log(res);
+}
+
+function setPartB() {
+    var selText = "1002 Beta";
+    $("#SelectPartName2.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    var str = selText;
+    var res = str.substring(0, 4);
+    console.log(res);
+}
+
+function setPartC() {
+    var selText = "1003 Gamma";
+    $("#SelectPartName3.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    var str = selText;
+    var res = str.substring(0, 4);
+    console.log(res);
+}
+
+function setPartD() {
+    var selText = "1004 Delta";
+    $("#SelectPartName4.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    var str = selText;
+    var res = str.substring(0, 4);
+    console.log(res);
+}
+

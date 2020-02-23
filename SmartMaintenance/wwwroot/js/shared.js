@@ -76,7 +76,8 @@ function checkRUL(RUL, AircraftId, PartId) {
         var msg = PartId+" of Aircraft " + AircraftId + " is predicted to fail!";
         sendNotification(msg);
         alertify.error(msg);
-        //sendNotification(msg);
+        localStorage.setItem(PartId, 1);
+
 
     }
 

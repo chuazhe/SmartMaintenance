@@ -1,48 +1,91 @@
 ﻿$(document).ready(function ($) {
 
-    //getPartName();
-    console.log(localStorage.getItem("result1"));
-    console.log(localStorage.getItem("result2"));
-    console.log(localStorage.getItem("result3"));
-    console.log(localStorage.getItem("result4"));
 
-    if (localStorage.getItem("result1")) {
-        console.log("good");
+    var tr;
 
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        let value = localStorage[key];
+        tr = tr + "<tr class=table-row>";
+        tr = tr + "<td>" + localStorage.key(i) + "</td>";
+        var name = getPartName(localStorage.key(i));
+        tr = tr + "<td>" + name + "</td>";
+        console.log(`localStorage ${key}:  ${value}`);
+    }
+    $('#tableMaintenancePart').append(tr);
+
+
+    $("#tableMaintenancePart").show();
+
+
+    var str = localStorage.key(0);
+    if (isNaN(str)) {
+        str = null;
     }
 
+    var str2 = localStorage.key(1);
+    if (isNaN(str2)) {
+        str2 = null;
+    }
+
+    var str3 = localStorage.key(2);
+    if (isNaN(str3)) {
+        str3 = null;
+    }
+
+    var str4 = localStorage.key(3);
+    if (isNaN(str4)) {
+        str4 = null;
+    }
+
+    console.log(str+str2+str3+str4);
 
 });
 
+function getPartName(partId) {
+    var name = "";
+    $.ajax({
+        type: "GET",
+        url: uri + "api/part/getspecificname/" + partId,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            //console.log(data);
+            name = data;
+
+        }
+    })
+    return name;
+
+}
+
 async function createMaintenancePlan() {
 
-    var str = $('#dropdown').text();
-    var res = str.substring(0, 4);
-    if (isNaN(res)) {
-        res = null;
+    var str = localStorage.key(0);
+    if (isNaN(str)) {
+        str = null;
     }
 
-    var str2 = $('#dropdown2').text();
-    var res2 = str2.substring(0, 4);
-    if (isNaN(res2)) {
-        res2 = null;
+    var str2 = localStorage.key(1);
+    if (isNaN(str2)) {
+        str2 = null;
     }
 
-    var str3 = $('#dropdown3').text();
-    var res3 = str3.substring(0, 4);
-    if (isNaN(res3)) {
-        res3 = null;
+    var str3 = localStorage.key(2);
+    if (isNaN(str3)) {
+        str3 = null;
     }
 
-    /*
-    var quantity = $('#quantity').val();
-
-    var quantity2 = $('#quantity2').val();
-
-    var quantity3 = $('#quantity3').val();
-
-    var quantity4 = $('#quantity4').val();
-    */
+    var str4 = localStorage.key(3);
+    if (isNaN(str4)) {
+        str4 = null;
+    }
 
     var quantity = 1;
 
@@ -64,39 +107,97 @@ async function createMaintenancePlan() {
     //var second = document.getElementById("seconds").value;
 
 
-    var result = checkPart(res, quantity);
-    var result2 = checkPart(res2, quantity2);
-    var result3 = checkPart(res3, quantity3);
-    var result4 = checkPart(res4, quantity4);
+    var result = checkPart(str, quantity);
+    var result2 = checkPart(str2, quantity2);
+    var result3 = checkPart(str3, quantity3);
+    var result4 = checkPart(str4, quantity4);
 
 
     if (result || result2 || result3 || result4) {
         postMaintenance(id, today);
         var Id2 = getTopId();
-        postMaintenancePart(Id2, res, quantity);
-        postMaintenancePart(Id2, res2, quantity2);
-        postMaintenancePart(Id2, res3, quantity3);
-        postMaintenancePart(Id2, res4, quantity4);
+        postMaintenancePart(Id2, str, quantity);
+        postMaintenancePart(Id2, str2, quantity2);
+        postMaintenancePart(Id2, str3, quantity3);
+        postMaintenancePart(Id2, str4, quantity4);
         // Notification
         setNoti();
     }
     else {
         if (!result && res != null) {
-            alertify.error("Part Id " + res + " is missing!");
+            prompt(res);
         }
         if (!result2 && res2 != null) {
-            alertify.error("Part Id " + res2 + " is missing!");
+            prompt(res2);
+
         }
         if (!result3 && res3 != null) {
-            alertify.error("Part Id " + res3 + " is missing!");
+            prompt(res3);
+
         }
         if (!result4 && res4 != null) {
-            alertify.error("Part Id " + res4 + " is missing!");
+            prompt(res4);
+
         }
 
     }
 
 }
+
+function prompt(res) {
+    alertify.prompt("Part Id " + res + " is missing!", "Would you like to order? Please enter the quantity.", "",
+        function (evt, value) {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = dd + '-' + mm + '-' + yyyy;
+
+            postOrder(today);
+
+            var Id = getTopId2();
+            console.log(Id);
+            postOrderPart(Id, res, value);
+        },
+        function () {
+            alertify.error("Part Id " + res + " is missing!");
+        })
+        ;
+}
+
+function postOrder(today) {
+    $.ajax({
+        type: "POST",
+        url: uri + "api/order/create",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({ "OrderDate": today, "OrderApprove": "0" }),
+        error: function (jqXHR, textStatus, errorThrown) {
+        },
+        success: function (result) {
+            alertify.success("Purchase Order is created!");
+        }
+    });
+};
+
+function postOrderPart(OrderId, PartId, Count) {
+    $.ajax({
+        type: "POST",
+        url: uri + "api/orderpart/create",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({ "OrderId": OrderId, "PartId": PartId, "Quantity": Count }),
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            console.log(result);
+        }
+    });
+};
 
 
 function setNoti() {
@@ -168,6 +269,28 @@ function getTopId() {
 
 };
 
+function getTopId2() {
+    var topId = 0;
+    $.ajax({
+        type: "GET",
+        url: uri + "api/order/gettop",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            topId = data;
+        }
+    });
+
+    return topId;
+
+};
+
 function postMaintenancePart(MaintenanceId, PartId, Count) {
     $.ajax({
         type: "POST",
@@ -184,37 +307,4 @@ function postMaintenancePart(MaintenanceId, PartId, Count) {
             //console.log("Good!");
         }
     });
-};
-
-function getPartName() {
-
-    var items = "";
-
-    $.ajax({
-        type: "GET",
-        url: uri + "api/part",
-        cache: false,
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                //console.log(data[i].partName);
-                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + data[i].partName + "</a ></li>";
-                //console.log(items);
-
-            }
-            $('#SelectPartName').html(items);
-            $('#SelectPartName2').html(items);
-            $('#SelectPartName3').html(items);
-            $('#SelectPartName4').html(items);
-
-
-
-            setDropdown();
-
-        }
-    })
 };

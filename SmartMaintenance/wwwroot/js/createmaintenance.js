@@ -170,21 +170,124 @@ async function createMaintenancePlan() {
     }
     else {
         if (!result && res !=null) {
-            alertify.error("Part Id "+res+" is missing!");
+            prompt(res);
         }
         if (!result2 && res2 != null) {
-            alertify.error("Part Id " +res2 + " is missing!");
+            prompt(res2);
+
         }
         if (!result3 && res3 != null) {
-            alertify.error("Part Id " +res3 + " is missing!");
+            prompt(res3);
+
         }
         if (!result4 && res4 != null) {
-            alertify.error("Part Id " + res4 + " is missing!");
+            prompt(res4);
+
         }
 
     }
 
 }
+
+function prompt(res) {
+    alertify.prompt("Part Id " + res + " is missing!","Would you like to order? Please enter the quantity.", "",
+        function (evt, value) {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = dd + '-' + mm + '-' + yyyy;
+
+            postOrder(today);
+
+            var Id = getTopId2();
+            console.log(Id);
+            postOrderPart(Id, res, value);
+        },
+        function () {
+            alertify.error("Part Id " + res + " is missing!");
+        })
+        ;
+}
+
+function postOrder(today) {
+    $.ajax({
+        type: "POST",
+        url: uri + "api/order/create",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({ "OrderDate": today, "OrderApprove": "0" }),
+        error: function (jqXHR, textStatus, errorThrown) {
+        },
+        success: function (result) {
+            alertify.success("Purchase Order is created!");
+        }
+    });
+};
+
+function getTopId() {
+    var topId = 0;
+    $.ajax({
+        type: "GET",
+        url: uri + "api/maintenance/gettop",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            topId = data;
+        }
+    });
+
+    return topId;
+
+};
+
+function getTopId2() {
+    var topId = 0;
+    $.ajax({
+        type: "GET",
+        url: uri + "api/order/gettop",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            topId = data;
+        }
+    });
+
+    return topId;
+
+};
+
+function postOrderPart(OrderId, PartId, Count) {
+    $.ajax({
+        type: "POST",
+        url: uri + "api/orderpart/create",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({ "OrderId": OrderId, "PartId": PartId, "Quantity": Count }),
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            console.log(result);
+        }
+    });
+};
+
+
 
 function setNoti() {
     $.ajax({

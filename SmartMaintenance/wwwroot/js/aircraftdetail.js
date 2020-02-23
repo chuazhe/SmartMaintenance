@@ -1,6 +1,15 @@
 ﻿$(document).ready(function ($) {
     getAircraftPart();
     getPartName();
+
+    localStorage.clear();
+
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        let value = localStorage[key];
+        console.log(`localStorage ${key}:  ${value}`);
+    }
+
 });
 
 function changeToMaintenance() {
@@ -45,8 +54,40 @@ function changeToInService() {
 }
 
 function autoPredict() {
-    checkRUL(29, $('#routeDataId').val());
+
+    getAircraftPartId();
 }
+
+
+function getAircraftPartId() {
+
+    var id = $('#routeDataId').val();
+
+    $("#tableAircraftPart").show();
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/aircraftpart/getspecific/" + id,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            // alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                checkRUL(29, $('#routeDataId').val(), data[i].partId);
+
+            }
+
+
+        }
+
+    })
+};
 
 function getAircraftPart() {
 
@@ -66,7 +107,7 @@ function getAircraftPart() {
             console.log(errorThrown);
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
@@ -91,12 +132,12 @@ function getPartName(partId) {
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
             //alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             name = data;
 
         }
