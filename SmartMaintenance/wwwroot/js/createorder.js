@@ -198,6 +198,9 @@ function createPurchaseOrder() {
     postOrderPart(Id, res3, quantity3);
     postOrderPart(Id, res4, quantity4);
 
+    alertManager(Id);
+
+
 
 
 }
@@ -333,3 +336,9 @@ function setPartD() {
     console.log(res);
 }
 
+function alertManager(Id) {
+
+    var msg = "Purchase Order " + Id + " is created!";
+    sendNotification(msg, 1);
+    //alertify.message(msg);
+}

@@ -50,7 +50,7 @@ $('.list-group-item').on('click', function () {
     //myfunction($this, $alias)
 })*/
 
-function sendNotification(x) {
+function sendNotification(x,value) {
     //var x = document.getElementById("msg").value;
     console.log(x);
 
@@ -58,7 +58,7 @@ function sendNotification(x) {
         type: "POST",
         url: uri + "api/notifications/sendnoti",
         contentType: "application/json",
-        data: JSON.stringify({ "msg": x }),
+        data: JSON.stringify({ "msg": x,"manager": value }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -73,12 +73,10 @@ function sendNotification(x) {
 
 function checkRUL(RUL, AircraftId, PartId) {
     if (RUL <= 30) {
-        var msg = PartId+" of Aircraft " + AircraftId + " is predicted to fail!";
-        sendNotification(msg);
+        var msg = "Part "+PartId+" of Aircraft " + AircraftId + " is predicted to fail!";
+        sendNotification(msg,0);
         alertify.error(msg);
         localStorage.setItem(PartId, 1);
-
-
     }
 
 }

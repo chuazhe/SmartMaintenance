@@ -124,19 +124,19 @@ async function createMaintenancePlan() {
         setNoti();
     }
     else {
-        if (!result && res != null) {
-            prompt(res);
+        if (!result && str != null) {
+            prompt(str);
         }
-        if (!result2 && res2 != null) {
-            prompt(res2);
+        if (!result2 && str2 != null) {
+            prompt(str2);
 
         }
-        if (!result3 && res3 != null) {
-            prompt(res3);
+        if (!result3 && str3 != null) {
+            prompt(str3);
 
         }
-        if (!result4 && res4 != null) {
-            prompt(res4);
+        if (!result4 && str4 != null) {
+            prompt(str4);
 
         }
 
