@@ -26,7 +26,7 @@ function getPlan(AircraftId) {
 
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row data-href=" + web + "Plan/confirm/" + data[i].maintenanceId + ">";
-                tr = tr + "<td>" + data[i].maintenanceId + "</td>";
+                tr = tr + "<td>" +"MP"+ data[i].maintenanceId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
 
             }

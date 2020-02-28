@@ -25,7 +25,7 @@ function getApproveOrder() {
             for (var i = 0; i < data.length; i++) {
                 if (data[i].orderApprove == 0) {
                     tr = tr + "<tr class=table-row data-href=" + web + "approve/confirm/" + data[i].orderId + ">";
-                    tr = tr + "<td>" + data[i].orderId + "</td>";
+                    tr = tr + "<td>"+"PO" + data[i].orderId + "</td>";
                     tr = tr + "<td>" + data[i].orderDate + "</td>";
                 }
             }

@@ -24,7 +24,7 @@ function getMaintenanceDetails() {
             var tr;
             var status;
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<td>" + data[i].aircraftId + "</td>";
+                tr = tr + "<td>" +"AR"+ data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
             }
             $('#tableMaintenanceDetails').append(tr);
@@ -55,7 +55,7 @@ function getMaintenancePart() {
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>" + data[i].partId + "</td>";
+                tr = tr + "<td>"+"EG" + data[i].partId + "</td>";
                 var name = getPartName(data[i].partId);
                 tr = tr + "<td>" + name + "</td>";
                 //tr = tr + "<td>" + data[i].partCount + "</td>";

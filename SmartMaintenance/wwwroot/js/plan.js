@@ -32,8 +32,8 @@ function getPlan() {
                 }
 
                 tr = tr + "<tr class=table-row data-href=" + web + "Plan/details/" + data[i].maintenanceId + ">";
-                tr = tr + "<td>" + data[i].maintenanceId + "</td>";
-                tr = tr + "<td>" + data[i].aircraftId + "</td>";
+                tr = tr + "<td>" + "MP"+data[i].maintenanceId + "</td>";
+                tr = tr + "<td>" +"AR"+ data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
                 tr = tr + "<td>" + result + "</td>";
 

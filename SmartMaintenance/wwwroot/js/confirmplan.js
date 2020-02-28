@@ -29,7 +29,7 @@ function getMaintenancePart() {
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>" + data[i].partId + "</td>";
+                tr = tr + "<td>" +"EG"+ data[i].partId + "</td>";
                 var name = getPartName(data[i].partId);
                 tr = tr + "<td>" + name + "</td>";
             }
