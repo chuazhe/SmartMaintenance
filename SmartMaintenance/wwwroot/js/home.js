@@ -33,6 +33,8 @@ var service = 0;
 var maintenance = 0;
 var approved = 0;
 var unapproved = 0;
+var done = 0;
+var notdone = 0;
 
 $(document).ready(function () {
     //value = $("#JWT").data('value');
@@ -43,8 +45,11 @@ $(document).ready(function () {
     getOrderCount();
     getApproved();
     getUnApproved();
+    getDone();
+    getUndone();
     setChart();
     setChart2();
+    setChart3();
     //getData2();
     //sendNotification();
     //alert("hello");
@@ -101,7 +106,40 @@ function setChart2() {
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
             'Approved Purchase Order',
-            'UnApproved Purchase Order',
+            'Unapproved Purchase Order',
+        ]
+    };
+
+    var options = {
+
+    };
+
+    var myPieChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: data,
+        options: options
+
+    });
+
+}
+
+function setChart3() {
+    var ctx2 = document.getElementById('myChart3').getContext('2d');
+
+    data = {
+        datasets: [{
+            data: [done, undone],
+            backgroundColor: [
+                'rgba(142,68,173, 0.5)',
+                'rgba(88,214,141, 0.5)'
+            ]
+
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Finished Maintenance Plan',
+            'Unfinished Maintenance Plan',
         ]
     };
 
@@ -197,6 +235,60 @@ function getUnApproved() {
 
             }
             unapproved = j;
+
+
+        }
+    })
+};
+
+function getUndone() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/maintenance/getundone",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+
+            var j = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                j++;
+
+            }
+            undone = j;
+
+
+        }
+    })
+};
+
+function getDone() {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/maintenance/getdone",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+
+            var j = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                j++;
+
+            }
+            done = j;
 
 
         }

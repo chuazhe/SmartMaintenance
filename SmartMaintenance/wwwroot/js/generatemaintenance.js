@@ -145,7 +145,7 @@ async function createMaintenancePlan() {
 }
 
 function prompt(res) {
-    alertify.prompt("Part Id " + res + " is not available!", "Would you like to order? Please enter the quantity.", "",
+    alertify.prompt("Engine Id EG" + res + " is not available!", "Would you like to order? Please enter the quantity.", "",
         function (evt, value) {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
@@ -159,9 +159,10 @@ function prompt(res) {
             var Id = getTopId2();
             console.log(Id);
             postOrderPart(Id, res, value);
+            alertManager(Id);
         },
         function () {
-            alertify.error("Part Id " + res + " is missing!");
+            alertify.error("Engine Id EG" + res + " is missing!");
         })
         ;
 }
@@ -308,3 +309,32 @@ function postMaintenancePart(MaintenanceId, PartId, Count) {
         }
     });
 };
+
+function sendNotification(x, value) {
+    //var x = document.getElementById("msg").value;
+    console.log(x);
+
+    $.ajax({
+        type: "POST",
+        url: uri + "api/notifications/sendnoti",
+        contentType: "application/json",
+        async: false,
+        data: JSON.stringify({ "msg": x, "manager": value }),
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (result) {
+            alertify.success("Notification sent!");
+        }
+    });
+};
+
+function alertManager(Id) {
+
+    var msg = "Purchase Order PO" + Id + " is created!";
+    sendNotification(msg, 1);
+    //alertify.message(msg);
+}

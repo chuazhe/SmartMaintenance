@@ -58,6 +58,7 @@ function sendNotification(x,value) {
         type: "POST",
         url: uri + "api/notifications/sendnoti",
         contentType: "application/json",
+        async: false,
         data: JSON.stringify({ "msg": x,"manager": value }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -73,7 +74,7 @@ function sendNotification(x,value) {
 
 function checkRUL(RUL, AircraftId, PartId) {
     if (RUL <= 30) {
-        var msg = "Part "+PartId+" of Aircraft " + AircraftId + " is predicted to fail!";
+        var msg = "Engine EG"+PartId+" of Aircraft AR" + AircraftId + " is predicted to fail!";
         sendNotification(msg,0);
         alertify.error(msg);
         localStorage.setItem(PartId, 1);
