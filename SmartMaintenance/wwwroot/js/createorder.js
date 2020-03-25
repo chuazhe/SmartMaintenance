@@ -32,96 +32,9 @@
         }
     });
 
-    $('#addSecond').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        $('#quantity2').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusSecond').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity2').val(quantity - 1);
-        }
-    });
-
-    $('#addThird').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        $('#quantity3').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusThird').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity3').val(quantity - 1);
-        }
-    });
-
-    $('#addFourth').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity4').val());
-
-        // If is not undefined
-
-        $('#quantity4').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusFourth').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity4').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity4').val(quantity - 1);
-        }
-    });
-
+    if ($("#productTable tbody").length == 0) {
+        $("#productTable").append("<tbody></tbody>");
+    }
 
 
     /*
@@ -201,8 +114,6 @@ function createPurchaseOrder() {
     alertManager(Id);
 
 
-
-
 }
 
 function postOrder(today) {
@@ -256,6 +167,39 @@ function postOrderPart(OrderId,PartId,Count) {
     });
 };
 
+
+function productAddToTable() {
+    var str = $('#dropdown').text();
+    var res = str.substring(0, 4); //id
+    var name = str.substring(5);
+
+    var quantity = $('#quantity').val();
+
+
+    var x = document.getElementById("productTable").rows.length;
+    $("#productTable tbody").append(
+        "<tr>" +
+        "<td style='width:30%'>" + res +
+        "</td>" +
+        "<td style='width:30%'>" + name +
+        "</td>" +
+        "<td style='width:20%'>" + quantity +
+        "</td>" +
+        "<td style='width:20%'>" +
+        "<button type='button'" +
+        "onclick='productDelete(this);' " +
+        "class='btn btn-default'>" +
+        "<span class='fa fa-window-close fa-2x' />" +
+        "</button>" +
+        "</td>" +
+        "</tr>"
+    );
+
+}
+
+function productDelete(ctl) {
+    $(ctl).parents("tr").remove();
+}
 
 
 function getPartName() {

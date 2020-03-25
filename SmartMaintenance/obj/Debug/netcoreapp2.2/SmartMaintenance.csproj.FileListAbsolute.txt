@@ -51,3 +51,5 @@ C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreap
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Plan\Finish.g.cshtml.cs
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Aircraft\Generate.g.cshtml.cs
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Plan\Generated.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Index.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Details.g.cshtml.cs

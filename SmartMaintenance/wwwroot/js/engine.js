@@ -1,16 +1,16 @@
 ﻿$(document).ready(function ($) {
 
-    getPart();
+    getEngine();
 
 });
 
-function getPart() {
+function getEngine() {
 
-    $("#tablePart").show();
+    $("#tableEngine").show();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/part",
+        url: uri + "api/engine",
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -23,14 +23,13 @@ function getPart() {
             //console.log(data);
 
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>" +"PT"+ data[i].partId + "</td>";
-                tr = tr + "<td>" + data[i].partName + "</td>";
-                tr = tr + "<td>" + data[i].partCount + "</td>";
+                tr = tr + "<tr class=table-row data-href=" + web + "engine/details/" + data[i].engineId + ">";
+                tr = tr + "<td>" + "EG" + data[i].engineId + "</td>";
+                tr = tr + "<td>" + data[i].engineName + "</td>";
 
             }
-            $('#tablePart').append(tr);
-            //TableClickable();
+            $('#tableEngine').append(tr);
+            TableClickable();
 
             /*
             $.each(data, function (key, item) {

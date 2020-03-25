@@ -79,5 +79,4 @@ function checkRUL(RUL, AircraftId, PartId) {
         alertify.error(msg);
         localStorage.setItem(PartId, 1);
     }
-
 }

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "EG"+ ViewContext.RouteData.Values["Id"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        Engine Id: EG@(ViewContext.RouteData.Values["Id"])
+    </h1>
+</div>
+
+<script src="~/js/enginedetail.js"></script>
+
+
+<div class="container-fluid">
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableEnginePart" style="display:none;">
+        <tr><th>Part Id</th><th>Part Name</th></tr>
+    </table>
+</div>
+
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

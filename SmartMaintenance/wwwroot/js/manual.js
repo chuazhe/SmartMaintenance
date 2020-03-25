@@ -29,7 +29,7 @@ function getPartName(partId) {
     var name = "";
     $.ajax({
         type: "GET",
-        url: uri + "api/part/getspecificname/" + partId,
+        url: uri + "api/engine/getspecificname/" + partId,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -58,7 +58,7 @@ function getAircraftPart() {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/aircraftpart/getspecific/" + id,
+        url: uri + "api/aircraftengine/getspecific/" + id,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -71,8 +71,8 @@ function getAircraftPart() {
             console.log(data);
             var tr;
             for (var i = 0; i < data.length; i++) {
-                var name = getPartName(data[i].partId);
-                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + name + "</a ></li>";
+                var name = getPartName(data[i].engineId);
+                items += "<li class='dropdown-item'><a >" + data[i].engineId + " " + name + "</a ></li>";
             }
 
             $('#SelectPartName').html(items);
@@ -116,7 +116,6 @@ function makePrediction() {
     if (isNaN(res)) {
         res = null;
     }
-
 
     /*
     if (res == 1001) {

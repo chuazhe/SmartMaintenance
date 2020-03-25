@@ -2,8 +2,6 @@
 
     getPartName();
 
-    /*
-
     $('#add').click(function (e) {
 
         // Stop acting like a button
@@ -34,68 +32,89 @@
         }
     });
 
-    $('#addSecond').click(function (e) {
+    if ($("#productTable tbody").length == 0) {
+        $("#productTable").append("<tbody></tbody>");
+    }
 
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        $('#quantity2').val(quantity + 1);
+    //productsAdd();
 
 
-        // Increment
-
-    });
-
-    $('#minusSecond').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity2').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity2').val(quantity - 1);
-        }
-    });
-
-    $('#addThird').click(function (e) {
-
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        $('#quantity3').val(quantity + 1);
-
-
-        // Increment
-
-    });
-
-    $('#minusThird').click(function (e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity3').val());
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('#quantity3').val(quantity - 1);
-        }
-    });
-    */
 });
 
+function test() {
+
+    /*
+    var x = document.getElementById("productTable").rows.length;
+    console.log(x);
+    */
+
+    var table = document.getElementById('productTable');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+        for (var c = 0, m = table.rows[r].cells.length; c < 3; c++) {
+            alert(table.rows[r].cells[c].innerHTML);
+
+        }
+    }
+
+}
+
+function productAddToTable() {
+    var str = $('#dropdown').text();
+    var res = str.substring(0, 4); //id
+    var name = str.substring(5);
+
+    var quantity = $('#quantity').val(); 
+
+    var x = document.getElementById("productTable").rows.length;
+    $("#productTable tbody").append(
+        "<tr>" +
+        "<td style='width:30%'>" + res +
+        "</td>" +
+        "<td style='width:30%'>"+name+
+        "</td>" +
+        "<td style='width:20%'>" + quantity +
+        "</td>" +
+        "<td style='width:20%'>" +
+        "<button type='button'" +
+        "onclick='productDelete(this);' " +
+        "class='btn btn-default'>" +
+        "<span class='fa fa-window-close fa-2x' />" +
+        "</button>" +
+        "</td>" +
+        "</tr>"
+    );
+
+}
+
+function productDelete(ctl) {
+    $(ctl).parents("tr").remove();
+}
+
+
+function productsAdd() {
+    $("#productTable tbody").append(
+        "<tr>" +
+        "<td>My First Video</td>" +
+        "<td>6/11/2015</td>" +
+        "<td>www.pluralsight.com</td>" +
+        "<td>" +
+        "<td>www.pluralsight.com</td>" +
+        "<button type='button' " +
+        "onclick='productDelete(this);' " +
+        "class='btn btn-default'>" +
+        "<span class='fa fa-edit' />" +
+        "</button>" +
+        "</td>" +
+        "</tr>"
+    );
+    /*
+     <div class="form-group">
+  <label for="usr">Name:</label>
+  <input type="text" class="form-control" id="usr">
+</div>
+      
+   * /
+}
 
 async function createMaintenancePlan() {
 
@@ -188,6 +207,8 @@ async function createMaintenancePlan() {
     }
 
 }
+
+
 
 function prompt(res) {
     alertify.prompt("Part Id " + res + " is not available!","Would you like to order? Please enter the quantity.", "",
@@ -398,10 +419,6 @@ function getPartName() {
 
             }
             $('#SelectPartName').html(items);
-            $('#SelectPartName2').html(items);
-            $('#SelectPartName3').html(items);
-            $('#SelectPartName4').html(items);
-
 
 
             setDropdown();

@@ -10,116 +10,61 @@
 <link rel="stylesheet" href="~/css/createmaintenance.css" />
 
 
-<div class="container">
+<div class="container" style="border-style: solid;">
     <div class="text-center">
         <h1 class="display-4">
             Aircraft Id: @(ViewContext.RouteData.Values["Id"])
         </h1>
+
+        <div class="row">
+            <div class="col-1">
+                <label>Part:</label>
+            </div>
+            <div class="col-2">
+                <div class="btn-group">
+                    <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="SelectPartName"></ul>
+                </div>
+            </div>
+            <div class="col-1">
+                <label>Quantity:</label>
+            </div>
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-left-minus btn btn-danger btn-number" id="minus" data-type="minus" data-field="">
+                            <span class="fa fa-minus"></span>
+                        </button>
+                    </span>
+                    <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="0" max="100">
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-right-plus btn btn-success btn-number" id="add" data-type="plus" data-field="">
+                            <span class="fa fa-plus"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary" onclick="productAddToTable()">Add</button>
+            </div>
+        </div>
+
+        <table id="productTable"
+               class="table table-bordered
+               table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th class="col-1">Quantity</th>
+                    <th class="col-1"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
     </div>
 
-    <div class="row">
-        <div class="col-2">
-            <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
-                <ul class="dropdown-menu" id="SelectPartName"></ul>
-            </div>
-        </div>
-        <!--
-        <div class="col-lg-2">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-left-minus btn btn-danger btn-number" id="minus" data-type="minus" data-field="">
-                        <span class="fa fa-minus"></span>
-                    </button>
-                </span>
-                <input type="text" id="quantity" name="quantity" class="form-control input-number" " value="0" min="0" max="100">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-right-plus btn btn-success btn-number" id="add" data-type="plus" data-field="">
-                        <span class="fa fa-plus"></span>
-                    </button>
-                </span>
-            </div>
-        </div>
-            -->
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" id="dropdown2" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
-                <ul class="dropdown-menu" id="SelectPartName2"></ul>
-            </div>
-        </div>
-        <!--
-        <div class="col-lg-2">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-left-minus second btn btn-danger btn-number" id="minusSecond" data-type="minus" data-field="">
-                        <span class="fa fa-minus"></span>
-                    </button>
-                </span>
-                <input type="text" id="quantity2" name="quantity2" class="form-control input-number" value="0" min="0" max="100">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-right-plus second btn btn-success btn-number" id="addSecond" data-type="plus" data-field="">
-                        <span class="fa fa-plus"></span>
-                    </button>
-                </span>
-            </div>
-        </div>
-            -->
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown3" href="#">Select Part<span class="caret"></span></a>
-                <ul class="dropdown-menu" id="SelectPartName3"></ul>
-            </div>
-        </div>
-        <!--
-        <div class="col-lg-2">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-left-minus second btn btn-danger btn-number" id="minusThird" data-type="minus" data-field="">
-                        <span class="fa fa-minus"></span>
-                    </button>
-                </span>
-                <input type="text" id="quantity3" name="quantity3" class="form-control input-number" value="0" min="0" max="100">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-right-plus second btn btn-success btn-number" id="addThird" data-type="plus" data-field="">
-                        <span class="fa fa-plus"></span>
-                    </button>
-                </span>
-            </div>
-        </div>
-            -->
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown4" href="#">Select Part<span class="caret"></span></a>
-                <ul class="dropdown-menu" id="SelectPartName4"></ul>
-            </div>
-        </div>
-        <!--
-        <div class="col-lg-2">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-left-minus second btn btn-danger btn-number" id="minusThird" data-type="minus" data-field="">
-                        <span class="fa fa-minus"></span>
-                    </button>
-                </span>
-                <input type="text" id="quantity3" name="quantity3" class="form-control input-number" value="0" min="0" max="100">
-                <span class="input-group-btn">
-                    <button type="button" class="quantity-right-plus second btn btn-success btn-number" id="addThird" data-type="plus" data-field="">
-                        <span class="fa fa-plus"></span>
-                    </button>
-                </span>
-            </div>
-        </div>
-            -->
-    </div>
+<div class="container">
 
     <label>Schedule On: </label>
     <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -135,7 +80,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary" onclick="createMaintenancePlan()">Create Maintenance Plan</button>
-
-
+    <button type="submit" class="btn btn-primary" onclick="test()">Test</button>
 </div>
+
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

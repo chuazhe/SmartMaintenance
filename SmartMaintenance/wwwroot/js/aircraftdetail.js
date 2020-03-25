@@ -80,9 +80,7 @@ function getAircraftPartId() {
             //console.log(data);
             for (var i = 0; i < data.length; i++) {
                 checkRUL(29, $('#routeDataId').val(), data[i].partId);
-
             }
-
 
         }
 
@@ -97,7 +95,7 @@ function getAircraftPart() {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/aircraftpart/getspecific/" + id,
+        url: uri + "api/aircraftengine/getspecific/" + id,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -111,8 +109,8 @@ function getAircraftPart() {
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>"+"EG" + data[i].partId + "</td>";
-                var name = getPartName(data[i].partId);
+                tr = tr + "<td>"+"EG" + data[i].engineId + "</td>";
+                var name = getPartName(data[i].engineId);
                 tr = tr + "<td>" + name + "</td>";
             }
             $('#tableAircraftPart').append(tr);
@@ -127,7 +125,7 @@ function getPartName(partId) {
     var name = "";
     $.ajax({
         type: "GET",
-        url: uri + "api/part/getspecificname/" + partId,
+        url: uri + "api/engine/getspecificname/" + partId,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Order "+ ViewContext.RouteData.Values["Id"];
+    ViewData["Title"] = "PO"+ ViewContext.RouteData.Values["Id"];
 }
 
 <div class="text-center">
@@ -13,13 +13,13 @@
 
 <div class="container-fluid">
     <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrderDetails" style="display:none;">
-        <tr><th>Order Date</th><th>Approved?</th></tr>
+        <tr><th>Date</th><th>Approved?</th></tr>
     </table>
 </div>
 
 <div class="container-fluid">
     <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrderPart" style="display:none;">
-        <tr><th>Engine Id</th><th>Engine Name</th><th>Quantity</th></tr>
+        <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
     </table>
 </div>
 
