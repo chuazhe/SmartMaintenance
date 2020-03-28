@@ -10,7 +10,7 @@ function getOrder() {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/Order",
+        url: uri + "api/Order/getunapproved",
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -30,9 +30,9 @@ function getOrder() {
                 else {
                     approve = "Yes";
                 }
-            
+
                 tr = tr + "<tr class=table-row data-href=" + web + "Purchase/details/" + data[i].orderId + ">";
-                tr = tr + "<td>"+"PO" + data[i].orderId + "</td>";
+                tr = tr + "<td>" + "PO" + data[i].orderId + "</td>";
                 tr = tr + "<td>" + data[i].orderDate + "</td>";
                 tr = tr + "<td>" + approve + "</td>";
 
@@ -52,19 +52,3 @@ function getOrder() {
 };
 
 
-function test() {
-
-    /*
-    var x = document.getElementById("productTable").rows.length;
-    console.log(x);
-    */
-
-    var table = document.getElementById('productTable');
-    for (var r = 1, n = table.rows.length; r < n; r++) {
-        for (var c = 0, m = table.rows[r].cells.length; c < 3; c++) {
-            alert(table.rows[r].cells[c].innerHTML);
-
-        }
-    }
-
-}

@@ -53,3 +53,9 @@ C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreap
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Plan\Generated.g.cshtml.cs
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Index.g.cshtml.cs
 C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Details.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Purchase\Approved.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Purchase\Unapproved.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Plan\unused.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Plan\Used.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Add.g.cshtml.cs
+C:\Users\User\source\repos\SmartMaintenance\SmartMaintenance\obj\Debug\netcoreapp2.2\Razor\Views\Engine\Delete.g.cshtml.cs

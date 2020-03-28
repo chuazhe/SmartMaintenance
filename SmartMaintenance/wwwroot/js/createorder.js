@@ -37,81 +37,32 @@
     }
 
 
-    /*
-    setPartA();
-    setPartB();
-    setPartC();
-    setPartD();
-
-
-    var str6 = $('#dropdown').text();
-    console.log(str6);
-
-    var str7 = $('#dropdown2').text();
-    console.log(str7);
-
-    var str8 = $('#dropdown3').text();
-    console.log(str8);
-
-    var str9 = $('#dropdown4').text();
-    console.log(str9);
-    */
-
-
 
 });
 
 function createPurchaseOrder() {
 
-    var str = $('#dropdown').text();
-    var res = str.substring(0, 4);
-    if (isNaN(res)) {
-        res = null;
-    } 
+    if (document.getElementById("productTable").rows.length!=1) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
 
-    var str2 = $('#dropdown2').text();
-    var res2 = str2.substring(0, 4);
-    if (isNaN(res2)) {
-        res2 = null;
-    } 
+        today = dd + '-' + mm + '-' + yyyy;
 
-    var str3 = $('#dropdown3').text();
-    var res3 = str3.substring(0, 4);
-    if (isNaN(res3)) {
-        res3 = null;
-    } 
+        postOrder(today);
 
-    var str4 = $('#dropdown4').text();
-    var res4 = str4.substring(0, 4);
-    if (isNaN(res3)) {
-        res3 = null;
-    } 
-
-    var quantity = $('#quantity').val();
-
-    var quantity2 = $('#quantity2').val();
-
-    var quantity3 = $('#quantity3').val();
-
-    var quantity4 = $('#quantity4').val();
+        var Id = getTopId();
 
 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = dd + '-' + mm + '-' + yyyy;
-
-    postOrder(today);
-
-    var Id = getTopId();
-    postOrderPart(Id, res, quantity);
-    postOrderPart(Id, res2, quantity2);
-    postOrderPart(Id, res3, quantity3);
-    postOrderPart(Id, res4, quantity4);
-
-    alertManager(Id);
+        var table = document.getElementById('productTable');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            var res = table.rows[r].cells[0].innerHTML;
+            var quantity = table.rows[r].cells[2].innerHTML;
+            postOrderPart(Id, res, quantity);
+        }
+        alertManager(Id);
+    }
 
 
 }
@@ -175,25 +126,27 @@ function productAddToTable() {
 
     var quantity = $('#quantity').val();
 
-
-    var x = document.getElementById("productTable").rows.length;
-    $("#productTable tbody").append(
-        "<tr>" +
-        "<td style='width:30%'>" + res +
-        "</td>" +
-        "<td style='width:30%'>" + name +
-        "</td>" +
-        "<td style='width:20%'>" + quantity +
-        "</td>" +
-        "<td style='width:20%'>" +
-        "<button type='button'" +
-        "onclick='productDelete(this);' " +
-        "class='btn btn-default'>" +
-        "<span class='fa fa-window-close fa-2x' />" +
-        "</button>" +
-        "</td>" +
-        "</tr>"
-    );
+    if (quantity != 0 && res!="Sele")
+    {
+        var x = document.getElementById("productTable").rows.length;
+        $("#productTable tbody").append(
+            "<tr>" +
+            "<td style='width:30%'>" + res +
+            "</td>" +
+            "<td style='width:30%'>" + name +
+            "</td>" +
+            "<td style='width:20%'>" + quantity +
+            "</td>" +
+            "<td style='width:20%'>" +
+            "<button type='button'" +
+            "onclick='productDelete(this);' " +
+            "class='btn btn-default'>" +
+            "<span class='fa fa-window-close fa-2x' />" +
+            "</button>" +
+            "</td>" +
+            "</tr>"
+        );
+    }
 
 }
 
@@ -225,10 +178,6 @@ function getPartName() {
 
             }
             $('#SelectPartName').html(items);
-            $('#SelectPartName2').html(items);
-            $('#SelectPartName3').html(items);
-            $('#SelectPartName4').html(items);
-
 
 
             setDropdown();
@@ -244,40 +193,8 @@ function setDropdown() {
         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
         var str = selText;
         var res = str.substring(0, 4);
-        console.log(res);
+        //console.log(res);
     });
-}
-
-function setPartA() {
-    var selText = "1001 Alpha";
-     $("#SelectPartName.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-        var str = selText;
-        var res = str.substring(0, 4);
-        console.log(res);
-}
-
-function setPartB() {
-    var selText = "1002 Beta";
-    $("#SelectPartName2.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-    var str = selText;
-    var res = str.substring(0, 4);
-    console.log(res);
-}
-
-function setPartC() {
-    var selText = "1003 Gamma";
-    $("#SelectPartName3.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-    var str = selText;
-    var res = str.substring(0, 4);
-    console.log(res);
-}
-
-function setPartD() {
-    var selText = "1004 Delta";
-    $("#SelectPartName4.dropdown-menu li a").parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-    var str = selText;
-    var res = str.substring(0, 4);
-    console.log(res);
 }
 
 function alertManager(Id) {

@@ -65,56 +65,34 @@ function productAddToTable() {
 
     var quantity = $('#quantity').val(); 
 
-    var x = document.getElementById("productTable").rows.length;
-    $("#productTable tbody").append(
-        "<tr>" +
-        "<td style='width:30%'>" + res +
-        "</td>" +
-        "<td style='width:30%'>"+name+
-        "</td>" +
-        "<td style='width:20%'>" + quantity +
-        "</td>" +
-        "<td style='width:20%'>" +
-        "<button type='button'" +
-        "onclick='productDelete(this);' " +
-        "class='btn btn-default'>" +
-        "<span class='fa fa-window-close fa-2x' />" +
-        "</button>" +
-        "</td>" +
-        "</tr>"
-    );
+    if (quantity != 0 && res != "Sele") {
 
+        var x = document.getElementById("productTable").rows.length;
+        $("#productTable tbody").append(
+            "<tr>" +
+            "<td style='width:30%'>" + res +
+            "</td>" +
+            "<td style='width:30%'>" + name +
+            "</td>" +
+            "<td style='width:20%'>" + quantity +
+            "</td>" +
+            "<td style='width:20%'>" +
+            "<button type='button'" +
+            "onclick='productDelete(this);' " +
+            "class='btn btn-default'>" +
+            "<span class='fa fa-window-close fa-2x' />" +
+            "</button>" +
+            "</td>" +
+            "</tr>"
+        );
+
+    }
 }
 
 function productDelete(ctl) {
     $(ctl).parents("tr").remove();
 }
 
-
-function productsAdd() {
-    $("#productTable tbody").append(
-        "<tr>" +
-        "<td>My First Video</td>" +
-        "<td>6/11/2015</td>" +
-        "<td>www.pluralsight.com</td>" +
-        "<td>" +
-        "<td>www.pluralsight.com</td>" +
-        "<button type='button' " +
-        "onclick='productDelete(this);' " +
-        "class='btn btn-default'>" +
-        "<span class='fa fa-edit' />" +
-        "</button>" +
-        "</td>" +
-        "</tr>"
-    );
-    /*
-     <div class="form-group">
-  <label for="usr">Name:</label>
-  <input type="text" class="form-control" id="usr">
-</div>
-      
-   * /
-}
 
 async function createMaintenancePlan() {
 
@@ -401,6 +379,8 @@ function postMaintenancePart(MaintenanceId, PartId, Count) {
 function getPartName() {
 
     var items = "";
+    var id = $('#routeDataId').val();
+
 
     $.ajax({
         type: "GET",

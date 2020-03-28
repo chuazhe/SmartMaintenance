@@ -77,9 +77,6 @@ function getAircraftPart() {
 
             $('#SelectPartName').html(items);
             setDropdown();
-
-
-
         }
 
     })

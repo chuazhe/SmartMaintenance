@@ -145,7 +145,7 @@ async function createMaintenancePlan() {
 }
 
 function prompt(res) {
-    alertify.prompt("Engine Id EG" + res + " is not available!", "Would you like to order? Please enter the quantity.", "",
+    alertify.prompt("Part Id PT" + res + " is not available!", "Would you like to order? Please enter the quantity.", "",
         function (evt, value) {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');

@@ -43,6 +43,18 @@ namespace SmartMaintenance.Controllers
             return View();
         }
 
+        // GET: Plan/Create
+        public ActionResult Used()
+        {
+            return View();
+        }
+
+        // GET: Plan/Create
+        public ActionResult Unused()
+        {
+            return View();
+        }
+
         // POST: Plan/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

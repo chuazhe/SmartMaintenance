@@ -17,4 +17,13 @@
     </table>
 </div>
 
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/engine/add/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-plus-circle" id="addPart"></i><br />Add Part</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/engine/delete/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-times-circle" id="deletePart"></i><br />Delete Part</a>
+    </div>
+</div>
+
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

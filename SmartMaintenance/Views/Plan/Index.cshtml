@@ -2,7 +2,10 @@
     ViewData["Title"] = "Maintenance Plan";
 }
 
-<div class="container-fluid">
+<div class="container-fluid" style="text-align: center;display:inline-block;">
+    <a class="col-3 btn btn-primary" style="margin:20px 0px 20px 0px;" href="https://localhost:44300/plan/used">Show Used Only</a>
+    <a class="col-3 btn btn-primary" style="margin:20px 0px 20px 0px;" href="https://localhost:44300/plan/unused">Show Unused Only</a>
+
     <table class='table table-bordered table-condensed table-striped table-hover' id="tablePlan" style="display:none; cursor:pointer ">
         <tr><th>Maintenance Id</th><th>Aircraft Id</th><th>Maintenance Date</th><th>Used</th></tr>
     </table>

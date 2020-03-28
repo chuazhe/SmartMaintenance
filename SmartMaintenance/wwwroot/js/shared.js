@@ -74,7 +74,7 @@ function sendNotification(x,value) {
 
 function checkRUL(RUL, AircraftId, PartId) {
     if (RUL <= 30) {
-        var msg = "Engine EG"+PartId+" of Aircraft AR" + AircraftId + " is predicted to fail!";
+        var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
         sendNotification(msg,0);
         alertify.error(msg);
         localStorage.setItem(PartId, 1);

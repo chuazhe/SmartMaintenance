@@ -22,5 +22,19 @@ namespace SmartMaintenance.Controllers
         {
             return View();
         }
+
+        public IActionResult Add()
+        {
+
+            return View();
+
+        }
+
+        public IActionResult Delete()
+        {
+
+            return View();
+
+        }
     }
     }

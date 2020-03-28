@@ -29,7 +29,7 @@ function getOrderDetails() {
                     approve = "No";
                 }
                 else {
-                    approve = "Yes";
+                    approve = data[i].orderApproveDate;
                 }
                 tr = tr + "<td>" + data[i].orderDate + "</td>";
                 tr = tr + "<td>" + approve + "</td>";

@@ -23,8 +23,22 @@ namespace SmartMaintenance.Controllers
             return View();
         }
 
+
         // GET: Purchase/Create
         public ActionResult Create()
+        {
+            return View();
+        }
+
+
+        // GET: Purchase/Create
+        public ActionResult Approved()
+        {
+            return View();
+        }
+
+        // GET: Purchase/Create
+        public ActionResult Unapproved()
         {
             return View();
         }
