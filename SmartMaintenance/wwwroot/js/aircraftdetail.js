@@ -1,6 +1,9 @@
-﻿$(document).ready(function ($) {
+﻿var allId = new Array;
+var myId = new Array;
+
+$(document).ready(function ($) {
     getAircraftPart();
-    getPartName();
+    //getPartName();
 
     localStorage.clear();
 
@@ -55,37 +58,14 @@ function changeToInService() {
 
 function autoPredict() {
 
-    getAircraftPartId();
+    getAircraftEngine();
+
+    console.log(allId);
+
+    localStorage.setItem("id", JSON.stringify(allId));
+    //checkRUL(29, id);
 }
 
-
-function getAircraftPartId() {
-
-    var id = $('#routeDataId').val();
-
-    $("#tableAircraftPart").show();
-
-    $.ajax({
-        type: "GET",
-        url: uri + "api/aircraftpart/getspecific/" + id,
-        cache: false,
-        async: false,
-        error: function (jqXHR, textStatus, errorThrown) {
-            // alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (data) {
-            //console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                checkRUL(29, $('#routeDataId').val(), data[i].partId);
-            }
-
-        }
-
-    })
-};
 
 function getAircraftPart() {
 
@@ -143,3 +123,63 @@ function getPartName(partId) {
     return name;
 
 }
+
+
+function getAircraftEngine() {
+
+    var id = $('#routeDataId').val();
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/aircraftengine/getspecific/" + id,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                getEnginePart(data[i].engineId);
+
+            }
+
+
+        }
+    })
+};
+
+function getEnginePart(engineId) {
+
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/enginepart/getspecific/" + engineId,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                //console.log(data[i].partId);
+
+                allId.push(data[i].partId);
+                /*
+                name = getPartName(allId[i]);
+                items += "<li class='dropdown-item'><a >" + allId[i] + " " + name + "</a ></li>";
+                */
+
+            }
+
+
+        }
+    })
+};

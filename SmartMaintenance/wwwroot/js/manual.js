@@ -114,13 +114,13 @@ function makePrediction() {
         res = null;
     }
 
-    /*
+    
     if (res == 1001) {
-        var url = "http://4cbbe6c3-26c3-468e-b7b9-b94642c257fd.southeastasia.azurecontainer.io/score";
+        var url = "http://2a3b8cca-f197-446d-93c1-75d875006c89.southeastasia.azurecontainer.io/score";
 
     }
     else if (res == 1002) {
-        var url = "http://793ff27d-c3b6-4a09-9906-4712ae5276d1.southeastasia.azurecontainer.io/score";
+        var url = "http://bb041ef8-6c35-460a-ab36-1b0fde1b7690.southeastasia.azurecontainer.io/score";
 
     }
     else if (res == 1003) {
@@ -131,7 +131,7 @@ function makePrediction() {
         var url = "http://96a20a4b-95a0-4ffa-8235-a352fb3e9538.southeastasia.azurecontainer.io/score";
 
     }
-    */
+    
     
     $.ajax({
         type: "GET",

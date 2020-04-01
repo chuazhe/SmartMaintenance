@@ -1,8 +1,55 @@
 ﻿$(document).ready(function ($) {
 
-
     var tr;
+    var names = window.localStorage.getItem('id');
+    names = names.replace("[", "");
+    names = names.replace("]", "");
+    var nameArr = names.split(',');
+    console.log(nameArr[0]);
 
+    //console.log(`localStorage ${key}:  ${value}`);
+
+    for (let i = 0; i < nameArr.length; i++)
+  {
+    tr = tr + "<tr class=table-row>";
+    tr = tr + "<td>" + nameArr[i] + "</td>";
+    var name = getPartName(nameArr[i]);
+    tr = tr + "<td>" + name + "</td>";
+        tr = tr + "<td style='width:20%'><button type='button' onclick='productDelete(this)' class='btn btn-default'><span class='fa fa-window-close fa-2x' /></button>";
+    }
+
+    $('#add').click(function (e) {
+
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+
+        // If is not undefined
+
+        $('#quantity').val(quantity + 1);
+
+
+        // Increment
+
+    });
+
+    $('#minus').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+
+        // If is not undefined
+
+        // Increment
+        if (quantity > 0) {
+            $('#quantity').val(quantity - 1);
+        }
+    });
+
+
+    /*
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         let value = localStorage[key];
@@ -12,35 +59,50 @@
         tr = tr + "<td>" + name + "</td>";
         console.log(`localStorage ${key}:  ${value}`);
     }
+    */
     $('#tableMaintenancePart').append(tr);
 
 
     $("#tableMaintenancePart").show();
 
+    getPartName2();
 
-    var str = localStorage.key(0);
-    if (isNaN(str)) {
-        str = null;
-    }
-
-    var str2 = localStorage.key(1);
-    if (isNaN(str2)) {
-        str2 = null;
-    }
-
-    var str3 = localStorage.key(2);
-    if (isNaN(str3)) {
-        str3 = null;
-    }
-
-    var str4 = localStorage.key(3);
-    if (isNaN(str4)) {
-        str4 = null;
-    }
-
-    console.log(str+str2+str3+str4);
 
 });
+
+
+function productDelete(ctl) {
+    $(ctl).parents("tr").remove();
+}
+
+function productAddToTable() {
+    var str = $('#dropdown').text();
+    var res = str.substring(0, 4); //id
+    var name = str.substring(5);
+
+    var quantity = $('#quantity').val();
+
+    if (quantity != 0 && res != "Sele") {
+        var x = document.getElementById("tableMaintenancePart").rows.length;
+        $("#tableMaintenancePart tbody").append(
+            "<tr>" +
+            "<td style='width:30%'>" + res +
+            "</td>" +
+            "<td style='width:30%'>" + name +
+            "</td>" +
+            "<td style='width:20%'>" +
+            "<button type='button'" +
+            "onclick='productDelete(this);' " +
+            "class='btn btn-default'>" +
+            "<span class='fa fa-window-close fa-2x' />" +
+            "</button>" +
+            "</td>" +
+            "</tr>"
+        );
+    }
+
+}
+
 
 function getPartName(partId) {
     var name = "";
@@ -65,82 +127,101 @@ function getPartName(partId) {
 
 }
 
+function getPartName2() {
+
+    var items = "";
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/part",
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                //console.log(data[i].partName);
+                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + data[i].partName + "</a ></li>";
+                //console.log(items);
+
+            }
+            $('#SelectPartName').html(items);
+
+
+            setDropdown();
+
+        }
+    })
+};
+
+function setDropdown() {
+    $(".dropdown-menu li a").click(function (e) {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        var str = selText;
+        var res = str.substring(0, 4);
+        //console.log(res);
+    });
+}
+
 async function createMaintenancePlan() {
-
-    var str = localStorage.key(0);
-    if (isNaN(str)) {
-        str = null;
-    }
-
-    var str2 = localStorage.key(1);
-    if (isNaN(str2)) {
-        str2 = null;
-    }
-
-    var str3 = localStorage.key(2);
-    if (isNaN(str3)) {
-        str3 = null;
-    }
-
-    var str4 = localStorage.key(3);
-    if (isNaN(str4)) {
-        str4 = null;
-    }
-
-    var quantity = 1;
-
-    var quantity2 = 1;
-
-    var quantity3 = 1;
-
-    var quantity4 = 1;
 
     var id = $('#routeDataId').val();
 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+    var result = 1;
+    var finalresult = 1;
 
-    today = dd + '-' + mm + '-' + yyyy;
+
+    var table = document.getElementById('tableMaintenancePart');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+        var res = table.rows[r].cells[0].innerHTML;
+        //var quantity = table.rows[r].cells[2].innerHTML;
+        result = checkPart(res, 1);
+        if (result == 0) {
+            prompt(res);
+            finalresult = 0;
+        }
+
+    }
+
+
+
+    if (result==1 && finalresult==1) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = dd + '-' + mm + '-' + yyyy;
+
+
+        postMaintenance(id, today);
+
+        var Id = getTopId();
+
+        var table = document.getElementById('tableMaintenancePart');
+        for (var r = 1, n = table.rows.length; r < n; r++) {
+            var res = table.rows[r].cells[0].innerHTML;
+            //var quantity = table.rows[r].cells[2].innerHTML;
+
+            postMaintenancePart(Id, res, 1);
+
+
+
+            //alertManager(Id);
+
+
+        }
+
+
+
+    }
 
     //var second = document.getElementById("seconds").value;
-
-
-    var result = checkPart(str, quantity);
-    var result2 = checkPart(str2, quantity2);
-    var result3 = checkPart(str3, quantity3);
-    var result4 = checkPart(str4, quantity4);
-
-
-    if (result || result2 || result3 || result4) {
-        postMaintenance(id, today);
-        var Id2 = getTopId();
-        postMaintenancePart(Id2, str, quantity);
-        postMaintenancePart(Id2, str2, quantity2);
-        postMaintenancePart(Id2, str3, quantity3);
-        postMaintenancePart(Id2, str4, quantity4);
-        // Notification
-        setNoti();
-    }
-    else {
-        if (!result && str != null) {
-            prompt(str);
-        }
-        if (!result2 && str2 != null) {
-            prompt(str2);
-
-        }
-        if (!result3 && str3 != null) {
-            prompt(str3);
-
-        }
-        if (!result4 && str4 != null) {
-            prompt(str4);
-
-        }
-
-    }
 
 }
 
@@ -157,12 +238,12 @@ function prompt(res) {
             postOrder(today);
 
             var Id = getTopId2();
-            console.log(Id);
+            //console.log(Id);
             postOrderPart(Id, res, value);
             alertManager(Id);
         },
         function () {
-            alertify.error("Engine Id EG" + res + " is missing!");
+            alertify.error("Part Id Part" + res + " is missing!");
         })
         ;
 }

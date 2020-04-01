@@ -32,6 +32,8 @@ function getMaintenancePart() {
                 tr = tr + "<td>" +"PT"+ data[i].partId + "</td>";
                 var name = getPartName(data[i].partId);
                 tr = tr + "<td>" + name + "</td>";
+                tr = tr + "<td>" + data[i].partCount + "</td>";
+
             }
             $('#tableMaintenancePart').append(tr);
 

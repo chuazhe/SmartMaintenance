@@ -72,11 +72,10 @@ function sendNotification(x,value) {
     });
 };
 
-function checkRUL(RUL, AircraftId, PartId) {
+function checkRUL(RUL, AircraftId) {
     if (RUL <= 30) {
         var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
         sendNotification(msg,0);
         alertify.error(msg);
-        localStorage.setItem(PartId, 1);
     }
 }
