@@ -167,9 +167,9 @@ async function createMaintenancePlan() {
             for (var r = 1, n = table.rows.length; r < n; r++) {
                 console.log(res);
                 var res = table.rows[r].cells[0].innerHTML;
-                //var quantity = table.rows[r].cells[2].innerHTML;
+                var quantity = table.rows[r].cells[2].innerHTML;
 
-                postMaintenancePart(Id, res, 1);
+                postMaintenancePart(Id, res, quantity);
 
                 //alertManager(Id);
 

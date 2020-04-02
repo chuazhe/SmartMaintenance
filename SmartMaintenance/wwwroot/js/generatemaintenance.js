@@ -1,20 +1,33 @@
-﻿$(document).ready(function ($) {
+﻿var part = new Array;
+var quantity = new Array;
+
+$(document).ready(function ($) {
 
     var tr;
     var names = window.localStorage.getItem('id');
+
     names = names.replace("[", "");
     names = names.replace("]", "");
     var nameArr = names.split(',');
-    console.log(nameArr[0]);
+    //console.log(nameArr[0]);
+
+    nameArr.sort();
+    foo(nameArr);
+
+    /*
+    console.log(part);
+    console.log(quantity);
+    */
 
     //console.log(`localStorage ${key}:  ${value}`);
 
-    for (let i = 0; i < nameArr.length; i++)
+    for (let i = 0; i < part.length; i++)
   {
     tr = tr + "<tr class=table-row>";
-    tr = tr + "<td>" + nameArr[i] + "</td>";
-    var name = getPartName(nameArr[i]);
-    tr = tr + "<td>" + name + "</td>";
+    tr = tr + "<td>" + part[i] + "</td>";
+    var name = getPartName(part[i]);
+        tr = tr + "<td>" + name + "</td>";
+        tr = tr + "<td>" + quantity[i] + "</td>";
         tr = tr + "<td style='width:20%'><button type='button' onclick='productDelete(this)' class='btn btn-default'><span class='fa fa-window-close fa-2x' /></button>";
     }
 
@@ -69,6 +82,21 @@
 
 
 });
+
+
+function foo(arr) {
+    var prev;
+
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] !== prev) {
+            part.push(arr[i]);
+            quantity.push(1);
+        } else {
+            quantity[quantity.length - 1]++;
+        }
+        prev = arr[i];
+    }
+}
 
 
 function productDelete(ctl) {
@@ -206,9 +234,9 @@ async function createMaintenancePlan() {
         var table = document.getElementById('tableMaintenancePart');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             var res = table.rows[r].cells[0].innerHTML;
-            //var quantity = table.rows[r].cells[2].innerHTML;
+            var quantity = table.rows[r].cells[2].innerHTML;
 
-            postMaintenancePart(Id, res, 1);
+            postMaintenancePart(Id, res, quantity);
 
 
 

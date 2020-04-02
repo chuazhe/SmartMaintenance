@@ -59,10 +59,10 @@ function changeToInService() {
 function autoPredict() {
 
     getAircraftEngine();
-
     console.log(allId);
 
     localStorage.setItem("id", JSON.stringify(allId));
+
     //checkRUL(29, id);
 }
 
@@ -172,11 +172,6 @@ function getEnginePart(engineId) {
                 //console.log(data[i].partId);
 
                 allId.push(data[i].partId);
-                /*
-                name = getPartName(allId[i]);
-                items += "<li class='dropdown-item'><a >" + allId[i] + " " + name + "</a ></li>";
-                */
-
             }
 
 
