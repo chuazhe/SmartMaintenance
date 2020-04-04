@@ -41,47 +41,30 @@ function AddPart()
     var txt = $("#partName").val();
     var quantity = $('#quantity').val(); 
 
+    postPart(txt,quantity);
 
-    console.log(txt);
-    console.log(quantity);
 
 }
 
-function postPart(MaintenanceId, PartId, Count) {
+function postPart(PartName, Count) {
     $.ajax({
         type: "POST",
-        url: uri + "api/maintenancepart/create",
+        url: uri + "api/part/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "MaintenanceId": MaintenanceId, "PartId": PartId, "PartCount": Count }),
+        data: JSON.stringify({ "PartName": PartName, "PartCount": Count }),
         error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+
+            /*
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
+            */
         },
         success: function (result) {
-            console.log("Good!");
+            alertify.success("New Part is created!");
+           // console.log("Good!");
         }
     });
-};
-
-function getTopId() {
-    var topId = 0;
-    $.ajax({
-        type: "GET",
-        url: uri + "api/maintenance/gettop",
-        cache: false,
-        async: false,
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (data) {
-            topId = data;
-        }
-    });
-
-    return topId;
-
 };

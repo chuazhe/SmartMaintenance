@@ -216,8 +216,6 @@ async function createMaintenancePlan() {
 
     }
 
-
-
     if (result==1 && finalresult==1) {
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -225,7 +223,6 @@ async function createMaintenancePlan() {
         var yyyy = today.getFullYear();
 
         today = dd + '-' + mm + '-' + yyyy;
-
 
         postMaintenance(id, today);
 
@@ -238,15 +235,9 @@ async function createMaintenancePlan() {
 
             postMaintenancePart(Id, res, quantity);
 
-
-
             //alertManager(Id);
 
-
         }
-
-
-
     }
 
     //var second = document.getElementById("seconds").value;
@@ -271,7 +262,7 @@ function prompt(res) {
             alertManager(Id);
         },
         function () {
-            alertify.error("Part Id Part" + res + " is missing!");
+            alertify.error("Part " + res + " is not available!");
         })
         ;
 }
