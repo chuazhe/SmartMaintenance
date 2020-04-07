@@ -7,9 +7,16 @@
     <link href="~/css/part.css" rel="stylesheet">
  -->
 
-<div class="container-fluid" style="text-align: center;display:inline-block;" >
+<div class="container-fluid" style="text-align: center;display:inline-block;">
     <a class="col-3 btn btn-primary" style="margin:20px 0px 20px 0px;" href="https://localhost:44300/inventory/create">Create New Part</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Manager"))
+        {
+            <a class="col-3 btn btn-primary" style="margin:20px 0px 20px 0px;" href="https://localhost:44300/inventory/delete">Delete Part</a>
 
+        }
+    }
     <table class='table table-bordered table-condensed table-striped table-hover' id="tablePart" style="display:none;">
         <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
     </table>
