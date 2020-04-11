@@ -2,25 +2,23 @@
     ViewData["Title"] = "MP"+ ViewContext.RouteData.Values["Id"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">
-        Maintenance Id: MP@(ViewContext.RouteData.Values["Id"])
-    </h1>
-</div>
-
 <script src="~/js/maintenancedetail.js"></script>
 
 
 <div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            MP@(ViewContext.RouteData.Values["Id"])
+        </a>
+    </nav>
     <table class='table table-bordered table-condensed table-striped table-hover' id="tableMaintenanceDetails" style="display:none;">
         <tr><th>Aircraft Id</th><th>Maintenance Date</th></tr>
     </table>
+        <table class='table table-bordered table-condensed table-striped table-hover' id="tableMaintenancePart" style="display:none;">
+            <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
+        </table>
 </div>
 
-<div class="container-fluid">
-    <table class='table table-bordered table-condensed table-striped table-hover' id="tableMaintenancePart" style="display:none;">
-        <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
-    </table>
-</div>
+
 
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

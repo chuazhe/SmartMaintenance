@@ -2,17 +2,16 @@
     ViewData["Title"] = "Add Part";
 }
 
-<div class="text-center">
-    <h1 class="display-4">
-        Engine Id: EG@(ViewContext.RouteData.Values["Id"])
-    </h1>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-1">
-            <label>Part:</label>
-        </div>
+<div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+           Add Part to EG@(ViewContext.RouteData.Values["Id"])
+
+        </a>
+    </nav>
+
+    <div class="row" style="margin-top:10px;">
         <div class="col-2">
             <div class="btn-group">
                 <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>

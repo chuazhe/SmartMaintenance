@@ -118,8 +118,8 @@ function productAddToTable() {
             "</td>" +
             "<td style='width:30%'>" + name +
             "</td>" +
-            "<td style='width:20%'>" +
-            "<button type='button'" +
+            "<td style='width:20%'>" + quantity +"</td>"+
+            "<td style='width:20%'>"+ "<button type='button'" +
             "onclick='productDelete(this);' " +
             "class='btn btn-default'>" +
             "<span class='fa fa-window-close fa-2x' />" +

@@ -60,6 +60,8 @@ function autoPredict() {
 
     getAircraftEngine();
     console.log(allId);
+    var id = $('#routeDataId').val();
+
 
     localStorage.setItem("id", JSON.stringify(allId));
 

@@ -4,29 +4,26 @@
 
 <script src="~/js/confirm.js" type="text/javascript"></script>
 
-<div class="text-center">
-    <h1 class="display-4">
-        Order Id: PO@(ViewContext.RouteData.Values["Id"])
-    </h1>
-</div>
+<div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            PO@(ViewContext.RouteData.Values["Id"])
+        </a>
+    </nav>
+    <table class='table table-bordered table-condensed table-striped table-hover' id="tableOrderPart" style="display:none;">
+        <tr><th>Part Id</th><th>Part Name</th><th>Quantity</th></tr>
+    </table>
 
-<div class="row">
-    <div class="col-6">
-        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/Approve"><i class="fa fa-10x fa-check-circle" id="approveOrder" onclick="approve()"></i><br />Approve</a>
-    </div>
-    <div class="col-6">
-        <a class="btn btn-primary btn-block btn-lg" href="#"><i class="fa fa-10x fa-times-circle" id="declineOrder" onclick="StillInDevelopment()"></i><br />Decline</a>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/Approve"><i class="fa fa-10x fa-check-circle" id="approveOrder" onclick="approve()"></i><br />Approve</a>
+        </div>
+        <!--
+        <div class="col-6">
+            <a class="btn btn-primary btn-block btn-lg" href="#"><i class="fa fa-10x fa-times-circle" id="declineOrder" onclick="StillInDevelopment()"></i><br />Decline</a>
+        </div>
+            -->
     </div>
 </div>
-
-
-<!--
-<div class="input-group" style="margin-top:20px">
-    <div class="input-group-prepend">
-        <span class="input-group-text">Comments</span>
-    </div>
-    <textarea class="form-control" aria-label="With textarea" id="orderComment"></textarea>
-</div>
--->
 
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

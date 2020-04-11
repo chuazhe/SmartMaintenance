@@ -70,6 +70,7 @@ namespace SmartMaintenance.Controllers
         }
 
         // GET: Inventory/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(int id)
         {
             return View();

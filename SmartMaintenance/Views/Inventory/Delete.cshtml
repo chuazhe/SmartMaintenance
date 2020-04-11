@@ -5,23 +5,27 @@
 <script src="~/js/deletepart.js" type="text/javascript"></script>
 
 
-<div class="container">
-    <div class="row">
-            <div class="col-1">
-                <label>Part:</label>
-            </div>
-            <div class="col-2">
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="SelectPartName"></ul>
-                </div>
-            </div>
+<div class="container-fluid">
 
-            <div class="col-2">
-                <a class="btn btn-primary" href="https://localhost:44300/inventory" onclick="DeletePart()">Delete</a>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            Delete Part
+        </a>
+    </nav>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-2">
+            <div class="btn-group">
+                <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
+                <ul class="dropdown-menu" id="SelectPartName"></ul>
             </div>
         </div>
+
+        <div class="col-2">
+            <a class="btn btn-primary" href="https://localhost:44300/inventory" onclick="DeletePart()">Delete</a>
+        </div>
     </div>
+</div>
 
 
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />

@@ -1,25 +1,40 @@
-﻿
+﻿var allId = new Array;
+var myId = new Array;
+var res;
+
+
 $(document).ready(function ($) {
     getAircraftPart();
 
     localStorage.clear();
 
+    /*
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         let value = localStorage[key];
         console.log(`localStorage ${key}:  ${value}`);
     }
+    */
 
 });
 
 
 function generatePlan() {
 
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        let value = localStorage[key];
-        console.log(`localStorage ${key}:  ${value}`);
-    }
+    /*
+    var str = $('#dropdown').text();
+    res = str.substring(0, 4);
+
+    console.log(res);
+    */
+
+    
+    console.log(allId);
+
+    localStorage.setItem("id", JSON.stringify(allId));
+    
+
+    //checkRUL(29, id);
 
 
 }
@@ -39,7 +54,7 @@ function getPartName(partId) {
             console.log(errorThrown);
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             name = data;
 
         }
@@ -68,7 +83,7 @@ function getAircraftPart() {
             console.log(errorThrown);
         },
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             var tr;
             for (var i = 0; i < data.length; i++) {
                 var name = getPartName(data[i].engineId);
@@ -151,9 +166,10 @@ function makePrediction() {
             var obj = result.substr(init + 1, fin - init - 1);
             console.log(obj);
             document.getElementById("result").innerHTML = obj;
-            console.log(res);
 
-            checkRUL(obj, $('#routeDataId').val(),res);
+            //console.log(res);
+
+            checkRUL2(obj, $('#routeDataId').val());
 
         }
     });
@@ -169,4 +185,17 @@ function setDropdown() {
         var res = str.substring(0, 4);
         //console.log(res);
     });
+}
+
+function checkRUL2(RUL, AircraftId) {
+    if (RUL <= 30) {
+
+        var str = $('#dropdown').text();
+        res = str.substring(0, 4);
+
+        allId.push(res);
+        var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
+        sendNotification(msg, 0);
+        alertify.error(msg);
+    }
 }

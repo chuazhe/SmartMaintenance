@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="~/css/createmaintenance.css" />
 
 
-<div class="container">
-    <div class="text-center">
-        <h1 class="display-4">
-            Aircraft Id: AR@(ViewContext.RouteData.Values["Id"])
-        </h1>
-    </div>
+<div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            Generated Plan for AR@(ViewContext.RouteData.Values["Id"])
+        </a>
+    </nav>
 
     <div class="row">
         <div class="col-1">
@@ -27,25 +27,25 @@
                 <ul class="dropdown-menu" id="SelectPartName"></ul>
             </div>
         </div>
-        <!--
-    <div class="col-1">
-        <label>Quantity:</label>
-    </div>
-    <div class="col-lg-2">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button type="button" class="quantity-left-minus btn btn-danger btn-number" id="minus" data-type="minus" data-field="">
-                    <span class="fa fa-minus"></span>
-                </button>
-            </span>
-            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="0" max="100">
-            <span class="input-group-btn">
-                <button type="button" class="quantity-right-plus btn btn-success btn-number" id="add" data-type="plus" data-field="">
-                    <span class="fa fa-plus"></span>
-                </button>
-            </span>
+        
+        <div class="col-1">
+            <label>Quantity:</label>
         </div>
-    </div>-->
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="quantity-left-minus btn btn-danger btn-number" id="minus" data-type="minus" data-field="">
+                        <span class="fa fa-minus"></span>
+                    </button>
+                </span>
+                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="0" max="100">
+                <span class="input-group-btn">
+                    <button type="button" class="quantity-right-plus btn btn-success btn-number" id="add" data-type="plus" data-field="">
+                        <span class="fa fa-plus"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
         <div class="col-2">
             <button type="submit" class="btn btn-primary" onclick="productAddToTable()">Add</button>
         </div>

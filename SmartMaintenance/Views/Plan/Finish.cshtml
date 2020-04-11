@@ -2,18 +2,18 @@
     ViewData["Title"] = "Finish Maintenance";
 }
 
-<div class="text-center">
-    <h1 class="display-4">
-        Maintenance Id: MP@(ViewContext.RouteData.Values["Id"])
-    </h1>
-</div>
+<script src="~/js/finishmaintenance.js" type="text/javascript"></script>
 
 <div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            Finish Maintenance Plan for AR@(ViewContext.RouteData.Values["Id"])
+        </a>
+    </nav>
     <table class='table table-bordered table-condensed table-striped table-hover' id="tableMaintenance" style="display:none; cursor:pointer ">
         <tr><th>Maintenance Id</th><th>Maintenance Date</th></tr>
     </table>
 </div>
 
 
-<script src="~/js/finishmaintenance.js" type="text/javascript"></script>
 <input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />
