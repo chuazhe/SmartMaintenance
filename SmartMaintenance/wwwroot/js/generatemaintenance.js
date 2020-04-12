@@ -6,13 +6,22 @@ $(document).ready(function ($) {
     var tr;
     var names = window.localStorage.getItem('id');
 
+
     names = names.replace("[", "");
     names = names.replace("]", "");
+    //names= names.replace(/['"]+/g, '');
+    console.log(names);
+
     var nameArr = names.split(',');
+
+
     //console.log(nameArr[0]);
 
     nameArr.sort();
+
     foo(nameArr);
+    //console.log(part);
+    //names = names.replace(/['"]+/g, '');
 
     /*
     console.log(part);
@@ -22,7 +31,8 @@ $(document).ready(function ($) {
     //console.log(`localStorage ${key}:  ${value}`);
 
     for (let i = 0; i < part.length; i++)
-  {
+    {
+        console.log(part[i]);
     tr = tr + "<tr class=table-row>";
     tr = tr + "<td>" + part[i] + "</td>";
     var name = getPartName(part[i]);

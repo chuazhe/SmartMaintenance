@@ -8,15 +8,13 @@
         <a class="navbar-brand" href="#">
             Manual Prediction for AR@(ViewContext.RouteData.Values["Id"])
         </a>
+
     </nav>
 
     <div class="row" style="margin-top:10px;">
-        <div class="col-1">
-            <label>Select Engine:</label>
-        </div>
         <div class="col-3">
             <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
+                <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Engine<span class="caret"></span></a>
                 <ul class="dropdown-menu" id="SelectPartName"></ul>
             </div>
         </div>
@@ -192,7 +190,7 @@
         </div>
         <!--https://localhost:44300/aircraft/generate/@(ViewContext.RouteData.Values["Id"])-->
         <button type="submit" class="col-2 btn btn-primary" onclick="makePrediction()" style="margin:auto;">Make Prediction</button>
-        <a type="submit" class="col-2 btn btn-primary" onclick="generatePlan()" href="#" style="margin:auto;">Generate Plan</a>
+        <a type="submit" href="https://localhost:44300/aircraft/generate/@(ViewContext.RouteData.Values["Id"])"  class="col-2 btn btn-primary" onclick="generatePlan()" style="margin:auto;">Generate Plan</a>
         <div class="col-4"><p>Result: <span id="result"></span></p></div>
 
     </div>

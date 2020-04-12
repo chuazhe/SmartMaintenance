@@ -131,7 +131,7 @@ function makePrediction() {
 
     
     if (res == 1001) {
-        var url = "http://2a3b8cca-f197-446d-93c1-75d875006c89.southeastasia.azurecontainer.io/score";
+        var url = "http://105436f6-8a78-4372-afc1-ec1e2935d566.southeastasia.azurecontainer.io/score";
 
     }
     else if (res == 1002) {
@@ -160,7 +160,7 @@ function makePrediction() {
             console.log(errorThrown);
         },
         success: function (result) {
-            console.log(result);
+            //console.log(result);
             init = result.indexOf('[');
             fin = result.indexOf(']');
             var obj = result.substr(init + 1, fin - init - 1);
@@ -168,8 +168,9 @@ function makePrediction() {
             document.getElementById("result").innerHTML = obj;
 
             //console.log(res);
+            let abc = parseInt($('#routeDataId').val());
 
-            checkRUL2(obj, $('#routeDataId').val());
+            checkRUL2(29, abc);
 
         }
     });
@@ -192,10 +193,38 @@ function checkRUL2(RUL, AircraftId) {
 
         var str = $('#dropdown').text();
         res = str.substring(0, 4);
+        getEnginePart(res);
 
-        allId.push(res);
         var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
         sendNotification(msg, 0);
         alertify.error(msg);
     }
 }
+
+
+function getEnginePart(engineId) {
+
+
+    $.ajax({
+        type: "GET",
+        url: uri + "api/enginepart/getspecific/" + engineId,
+        cache: false,
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].partId);
+
+                allId.push(data[i].partId);
+            }
+
+
+        }
+    })
+};
