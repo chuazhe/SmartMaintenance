@@ -40,6 +40,16 @@
             <a class="btn btn-primary btn-block btn-lg" href="#" style="margin-top:20px"><i class="fa fa-10x fa-plane-departure" onclick="changeToInService()"></i><br />Change to In Service</a>
         </div>
     </div>
+
+    <div class="row">
+
+        <div class="col-6">
+            <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/addengine/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-plus-circle" ></i><br />Add Engine</a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/removeengine/@(ViewContext.RouteData.Values["Id"])" style="margin-top:20px"><i class="fa fa-10x fa-times-circle"></i><br />Remove Engine</a>
+        </div>
+    </div>
 </div>
 
 

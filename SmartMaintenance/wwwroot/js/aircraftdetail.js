@@ -57,15 +57,24 @@ function changeToInService() {
 }
 
 function autoPredict() {
+    var id = $('#routeDataId').val();
 
+    checkRUL(29, id);
     getAircraftEngine();
     console.log(allId);
-    var id = $('#routeDataId').val();
 
 
     localStorage.setItem("id", JSON.stringify(allId));
 
-    //checkRUL(29, id);
+}
+
+function checkRUL2(RUL, AircraftId) {
+
+    if (RUL <= 30) {
+        var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
+        sendNotification(msg, 0);
+        alertify.error(msg);
+    }
 }
 
 

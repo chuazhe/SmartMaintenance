@@ -47,6 +47,18 @@ namespace SmartMaintenance.Controllers
             return View();
         }
 
+        // GET: Aircraft/Create
+        public ActionResult AddEngine()
+        {
+            return View();
+        }
+
+        // GET: Aircraft/Create
+        public ActionResult RemoveEngine()
+        {
+            return View();
+        }
+
         // POST: Aircraft/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

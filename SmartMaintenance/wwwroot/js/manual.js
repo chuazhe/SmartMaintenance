@@ -170,7 +170,7 @@ function makePrediction() {
             //console.log(res);
             let abc = parseInt($('#routeDataId').val());
 
-            checkRUL2(29, abc);
+            checkRUL2(obj, abc);
 
         }
     });

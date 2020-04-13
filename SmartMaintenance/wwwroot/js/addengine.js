@@ -44,10 +44,6 @@ function createPurchaseOrder() {
     var res = str.substring(0, 4); //id
 
     postEnginePart(id, res);
-
-
-
-
 }
 
 

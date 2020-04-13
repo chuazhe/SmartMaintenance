@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "AddEngine";
+}
+
+<div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            Add Engine to AR@(ViewContext.RouteData.Values["Id"])
+
+        </a>
+    </nav>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-2">
+            <div class="btn-group">
+                <a class="btn btn-primary dropdown-toggle" id="dropdown" data-toggle="dropdown" href="#">Select Part<span class="caret"></span></a>
+                <ul class="dropdown-menu" id="SelectPartName"></ul>
+            </div>
+        </div>
+        <div class="col-3">
+            <a href="https://localhost:44300/Aircraft" type="submit" class="btn btn-primary" onclick="createPurchaseOrder()">Add Engine to Aircraft</a>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" value='@ViewContext.RouteData.Values["id"]' id="routeDataId" />
+<script src="~/js/aircraftaddengine.js"></script>
