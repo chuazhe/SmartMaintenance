@@ -89,3 +89,15 @@ function getPartName(partId) {
     return name;
 
 }
+
+
+function scheduleMaintenancePlan() {
+    $.ajax({
+        type: 'POST',
+        url: uri + 'api/notifications/setnoti/' + document.getElementById("seconds").value + "/" + $('#routeDataId').val(),
+        success: function (data) {
+        },
+        error: function (error) {
+        }
+    })
+}

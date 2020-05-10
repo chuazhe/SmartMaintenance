@@ -70,7 +70,7 @@ function autoPredict() {
 
 function checkRUL2(RUL, AircraftId) {
 
-    if (RUL <= 30) {
+    if (RUL <= 40) {
         var msg = "Aircraft AR" + AircraftId + " is predicted to fail!";
         sendNotification(msg, 0);
         alertify.error(msg);

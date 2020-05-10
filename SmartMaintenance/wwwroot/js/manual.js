@@ -169,7 +169,6 @@ function makePrediction() {
 
             //console.log(res);
             let abc = parseInt($('#routeDataId').val());
-
             checkRUL2(obj, abc);
 
         }
@@ -189,7 +188,7 @@ function setDropdown() {
 }
 
 function checkRUL2(RUL, AircraftId) {
-    if (RUL <= 30) {
+    if (RUL <= 40) {
 
         var str = $('#dropdown').text();
         res = str.substring(0, 4);

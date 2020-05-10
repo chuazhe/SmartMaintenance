@@ -1,7 +1,7 @@
 ﻿$(document).ready(function ($) {
 
     getOrderDetails();
-    getOrderPart();
+    getOrderPart2();
 });
 
 
@@ -56,7 +56,7 @@ function getOrderPart()
             console.log(errorThrown);
         },
         success: function (data) {
-            //console.log(data);
+            console.log(data);
             for (var i = 0; i < data.length; i++) {
                 addPart(data[i].partId, data[i].quantity);
             }
@@ -79,6 +79,7 @@ function addPart(PartId, PartCount) {
             console.log(errorThrown);
         },
         success: function (data) {
+
 
         }
     })
@@ -123,7 +124,7 @@ function getOrderDetails() {
     })
 };
 
-function getOrderPart() {
+function getOrderPart2() {
 
     var id = $('#routeDataId').val();
 
