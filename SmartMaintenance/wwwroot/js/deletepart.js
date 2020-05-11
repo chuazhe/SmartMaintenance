@@ -14,7 +14,7 @@ function DeletePart() {
 
     console.log(res);
 
-    //postPart(res);
+    postPart(res);
 
 
 }

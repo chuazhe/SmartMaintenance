@@ -47,7 +47,8 @@ function getPlan() {
                 //console.log(key);
                 //console.log(item);
 
-            });*/
+            });
+            */
 
         }
     })

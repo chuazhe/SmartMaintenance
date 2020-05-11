@@ -8,34 +8,14 @@ $(document).ready(function ($) {
 
     localStorage.clear();
 
-    /*
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        let value = localStorage[key];
-        console.log(`localStorage ${key}:  ${value}`);
-    }
-    */
-
 });
 
 
 function generatePlan() {
 
-    /*
-    var str = $('#dropdown').text();
-    res = str.substring(0, 4);
-
-    console.log(res);
-    */
-
-    
     console.log(allId);
 
     localStorage.setItem("id", JSON.stringify(allId));
-    
-
-    //checkRUL(29, id);
-
 
 }
 
@@ -128,25 +108,6 @@ function makePrediction() {
     if (isNaN(res)) {
         res = null;
     }
-
-    
-    if (res == 1001) {
-        var url = "http://105436f6-8a78-4372-afc1-ec1e2935d566.southeastasia.azurecontainer.io/score";
-
-    }
-    else if (res == 1002) {
-        var url = "http://bb041ef8-6c35-460a-ab36-1b0fde1b7690.southeastasia.azurecontainer.io/score";
-
-    }
-    else if (res == 1003) {
-        var url = "http://bee85316-4989-4a5f-a470-87949630f2b5.southeastasia.azurecontainer.io/score";
-
-    }
-    else if (res == 1004) {
-        var url = "http://96a20a4b-95a0-4ffa-8235-a352fb3e9538.southeastasia.azurecontainer.io/score";
-
-    }
-    
     
     $.ajax({
         type: "GET",
@@ -222,7 +183,6 @@ function getEnginePart(engineId) {
 
                 allId.push(data[i].partId);
             }
-
 
         }
     })

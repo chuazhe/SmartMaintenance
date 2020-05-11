@@ -7,12 +7,7 @@
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
-
         $('#quantity').val(quantity + 1);
-
-
-        // Increment
 
     });
 
@@ -22,18 +17,10 @@
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
-
-        // Increment
         if (quantity > 0) {
             $('#quantity').val(quantity - 1);
         }
     });
-
-
-
-
-
 });
 
 function AddPart()

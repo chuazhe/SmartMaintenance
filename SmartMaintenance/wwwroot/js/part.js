@@ -37,7 +37,8 @@ function getPart() {
                 //console.log(key);
                 //console.log(item);
 
-            });*/
+            });
+            */
 
         }
     })

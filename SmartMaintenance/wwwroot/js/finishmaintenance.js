@@ -38,7 +38,8 @@ function getPlan(AircraftId) {
                 //console.log(key);
                 //console.log(item);
 
-            });*/
+            });
+            */
 
         }
     })

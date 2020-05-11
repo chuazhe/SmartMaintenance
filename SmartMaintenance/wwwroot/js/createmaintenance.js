@@ -4,11 +4,9 @@ var myId = new Array;
 $(document).ready(function ($) {
 
     getAircraftEngine();
-    //console.log(allId);
 
     var uniqueNames = getUnique(allId);
     uniqueNames.sort();
-    //console.log(uniqueNames); 
 
     var items = "";
 
@@ -30,12 +28,8 @@ $(document).ready(function ($) {
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
 
         $('#quantity').val(quantity + 1);
-
-
-        // Increment
 
     });
 
@@ -45,9 +39,7 @@ $(document).ready(function ($) {
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
 
-        // Increment
         if (quantity > 0) {
             $('#quantity').val(quantity - 1);
         }
@@ -58,7 +50,6 @@ $(document).ready(function ($) {
     }
 
     //productsAdd();
-
 
 });
 
@@ -74,7 +65,7 @@ function getUnique(array) {
     return uniqueArray;
 }
 
-function test() {
+function showTableData() {
 
     /*
     var x = document.getElementById("productTable").rows.length;

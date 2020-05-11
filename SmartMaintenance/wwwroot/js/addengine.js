@@ -71,12 +71,6 @@ function getPart() {
 
             }
 
-           // $('#SelectPartName').html(items);
-
-            //console.log(data);
-
-            //setDropdown();
-
         }
     })
 };

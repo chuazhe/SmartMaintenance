@@ -5,6 +5,6 @@
     }).datepicker('update', new Date());
 });
 
-function Test() {
+function showDate() {
     console.log($("#datepicker").val()); //2014-4-15
 }

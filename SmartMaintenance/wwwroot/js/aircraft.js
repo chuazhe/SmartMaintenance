@@ -1,6 +1,4 @@
-﻿//Local Host for Web Api
-
-$(document).ready(function ($) {
+﻿$(document).ready(function ($) {
 
     getAircraft();
 
@@ -45,7 +43,6 @@ function getAircraft() {
             $.each(data, function (key, item) {
                 //console.log(key);
                 //console.log(item);
-
             });*/
 
         }

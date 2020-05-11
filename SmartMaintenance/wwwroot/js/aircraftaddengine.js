@@ -13,14 +13,11 @@ $(document).ready(function ($) {
         if (index > -1) {
             allId.splice(index, 1);
         }
-
     }
 
     // array = [2, 9]
     console.log(allId);
-
     
-
     var name;
 
     for (let i = 0; i < allId.length; i++) {
@@ -73,12 +70,6 @@ function getEngine() {
                 console.log(items);
 
             }
-
-            // $('#SelectPartName').html(items);
-
-            //console.log(data);
-
-            //setDropdown();
 
         }
     })

@@ -42,13 +42,6 @@ function getPlan() {
             $('#tablePlan').append(tr);
             TableClickable();
 
-            /*
-            $.each(data, function (key, item) {
-                //console.log(key);
-                //console.log(item);
-
-            });*/
-
         }
     })
 };

@@ -9,26 +9,14 @@ $(document).ready(function ($) {
 
     names = names.replace("[", "");
     names = names.replace("]", "");
-    //names= names.replace(/['"]+/g, '');
     console.log(names);
 
     var nameArr = names.split(',');
 
-
-    //console.log(nameArr[0]);
-
     nameArr.sort();
 
-    foo(nameArr);
-    //console.log(part);
-    //names = names.replace(/['"]+/g, '');
+    deleteDuplicateValues(nameArr);
 
-    /*
-    console.log(part);
-    console.log(quantity);
-    */
-
-    //console.log(`localStorage ${key}:  ${value}`);
 
     for (let i = 0; i < part.length; i++)
     {
@@ -48,12 +36,7 @@ $(document).ready(function ($) {
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
-
         $('#quantity').val(quantity + 1);
-
-
-        // Increment
 
     });
 
@@ -63,26 +46,13 @@ $(document).ready(function ($) {
         // Get the field name
         var quantity = parseInt($('#quantity').val());
 
-        // If is not undefined
 
-        // Increment
         if (quantity > 0) {
             $('#quantity').val(quantity - 1);
         }
     });
 
 
-    /*
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        let value = localStorage[key];
-        tr = tr + "<tr class=table-row>";
-        tr = tr + "<td>" + localStorage.key(i) + "</td>";
-        var name = getPartName(localStorage.key(i));
-        tr = tr + "<td>" + name + "</td>";
-        console.log(`localStorage ${key}:  ${value}`);
-    }
-    */
     $('#tableMaintenancePart').append(tr);
 
 
@@ -94,7 +64,7 @@ $(document).ready(function ($) {
 });
 
 
-function foo(arr) {
+function deleteDuplicateValues(arr) {
     var prev;
 
     for (var i = 0; i < arr.length; i++) {
