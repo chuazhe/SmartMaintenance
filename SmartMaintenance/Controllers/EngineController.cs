@@ -37,4 +37,4 @@ namespace SmartMaintenance.Controllers
 
         }
     }
-    }
+}

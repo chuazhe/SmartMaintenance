@@ -16,7 +16,7 @@ using SmartMaintenance.Models;
 namespace SmartMaintenance.Controllers
 {
     // 1 authorize for all the function under this class, except for those who has [AllowAnonymous]
-    
+
     public class AccountController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -90,7 +90,7 @@ namespace SmartMaintenance.Controllers
 
                             string test = _appSettings.WebApiUri + "api/account/login";
                             Console.WriteLine(test);
-                            using (var response = await httpClient.PostAsync(_appSettings.WebApiUri+ "api/account/login", content))
+                            using (var response = await httpClient.PostAsync(_appSettings.WebApiUri + "api/account/login", content))
                             {
                                 string apiResponse = await response.Content.ReadAsStringAsync();
                                 Console.WriteLine(apiResponse);

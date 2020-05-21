@@ -23,7 +23,7 @@ function approveOrder() {
 
     $.ajax({
         type: "PUT",
-        url: uri + "api/order/approve/" + $('#routeDataId').val()+"/"+today,
+        url: uri + "api/order/approve/" + $('#routeDataId').val() + "/" + today,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -40,13 +40,12 @@ function approveOrder() {
     })
 };
 
-function getOrderPart()
-{
+function getOrderPart() {
     var id = $('#routeDataId').val();
 
     $.ajax({
         type: "GET",
-        url: uri + "api/orderpart/getspecific/"+id,
+        url: uri + "api/orderpart/getspecific/" + id,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {

@@ -12,7 +12,7 @@ function getMaintenanceDetails() {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/maintenance/getspecific/"+id,
+        url: uri + "api/maintenance/getspecific/" + id,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -24,7 +24,7 @@ function getMaintenanceDetails() {
             var tr;
             var status;
             for (var i = 0; i < data.length; i++) {
-                tr = tr + "<td>" +"AR"+ data[i].aircraftId + "</td>";
+                tr = tr + "<td>" + "AR" + data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
             }
             $('#tableMaintenanceDetails').append(tr);
@@ -55,7 +55,7 @@ function getMaintenancePart() {
             var tr;
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>"+"PT" + data[i].partId + "</td>";
+                tr = tr + "<td>" + "PT" + data[i].partId + "</td>";
                 var name = getPartName(data[i].partId);
                 tr = tr + "<td>" + name + "</td>";
                 tr = tr + "<td>" + data[i].partCount + "</td>";
@@ -68,10 +68,10 @@ function getMaintenancePart() {
 };
 
 function getPartName(partId) {
-    var name="";
+    var name = "";
     $.ajax({
         type: "GET",
-        url: uri + "api/part/getspecificname/"+partId,
+        url: uri + "api/part/getspecificname/" + partId,
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {

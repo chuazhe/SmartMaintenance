@@ -6,7 +6,7 @@
 
 function getAircraft() {
 
-    $("#tableAircraft").show();  
+    $("#tableAircraft").show();
 
     $.ajax({
         type: "GET",
@@ -31,8 +31,8 @@ function getAircraft() {
                 else {
                     status = "In Service";
                 }
-                tr = tr + "<tr class=table-row data-href="+web+"aircraft/details/"+data[i].aircraftId+">";
-                tr = tr + "<td>" +"AR"+ data[i].aircraftId + "</td>";
+                tr = tr + "<tr class=table-row data-href=" + web + "aircraft/details/" + data[i].aircraftId + ">";
+                tr = tr + "<td>" + "AR" + data[i].aircraftId + "</td>";
                 tr = tr + "<td>" + data[i].aircraftName + "</td>";
                 tr = tr + "<td>" + status + "</td>";
             }

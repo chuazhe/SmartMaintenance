@@ -24,7 +24,7 @@ function StillInDevelopment() {
     alertify.error('Still In Development');
 }
 
-function sendNotification(x,value) {
+function sendNotification(x, value) {
     //var x = document.getElementById("msg").value;
     console.log(x);
 
@@ -33,7 +33,7 @@ function sendNotification(x,value) {
         url: uri + "api/notifications/sendnoti",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "msg": x,"manager": value }),
+        data: JSON.stringify({ "msg": x, "manager": value }),
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);

@@ -30,9 +30,9 @@ function getOrder() {
                 else {
                     approve = "Yes";
                 }
-            
+
                 tr = tr + "<tr class=table-row data-href=" + web + "Purchase/details/" + data[i].orderId + ">";
-                tr = tr + "<td>"+"PO" + data[i].orderId + "</td>";
+                tr = tr + "<td>" + "PO" + data[i].orderId + "</td>";
                 tr = tr + "<td>" + data[i].orderDate + "</td>";
                 tr = tr + "<td>" + approve + "</td>";
 

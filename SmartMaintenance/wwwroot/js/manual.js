@@ -108,7 +108,7 @@ function makePrediction() {
     if (isNaN(res)) {
         res = null;
     }
-    
+
     $.ajax({
         type: "GET",
         url: uri + "api/notifications/predict/" + setting1 + "/" + setting2 + "/" + setting3 + "/" + s1 + "/" + s2 + "/" + s3 + "/" + s4 + "/" + s5 +
@@ -121,14 +121,14 @@ function makePrediction() {
             console.log(errorThrown);
         },
         success: function (result) {
-            //console.log(result);
+            console.log(result);
             init = result.indexOf('[');
             fin = result.indexOf(']');
             var obj = result.substr(init + 1, fin - init - 1);
             console.log(obj);
             document.getElementById("result").innerHTML = obj;
 
-            //console.log(res);
+            console.log(res);
             let abc = parseInt($('#routeDataId').val());
             checkRUL2(obj, abc);
 

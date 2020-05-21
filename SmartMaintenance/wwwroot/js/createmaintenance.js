@@ -10,8 +10,7 @@ $(document).ready(function ($) {
 
     var items = "";
 
-    for (let i = 0; i < uniqueNames.length; i++)
-    {
+    for (let i = 0; i < uniqueNames.length; i++) {
         var name = getPartName(uniqueNames[i]);
         items += "<li class='dropdown-item'><a >" + uniqueNames[i] + " " + name + "</a ></li>";
 
@@ -88,7 +87,7 @@ function productAddToTable() {
     var res = str.substring(0, 4); //id
     var name = str.substring(5);
 
-    var quantity = $('#quantity').val(); 
+    var quantity = $('#quantity').val();
 
     if (quantity != 0 && res != "Sele") {
 
@@ -176,7 +175,7 @@ async function createMaintenancePlan() {
 
 
 function prompt(res) {
-    alertify.prompt("Part Id PT" + res + " is not available!","Would you like to order? Please enter the quantity.", "",
+    alertify.prompt("Part Id PT" + res + " is not available!", "Would you like to order? Please enter the quantity.", "",
         function (evt, value) {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
@@ -295,7 +294,7 @@ function checkPart(id, count) {
         url: uri + "api/part/getget",
         dataType: 'json',
         async: false,
-        data: { "id":id, "count":count },
+        data: { "id": id, "count": count },
         success: function (data) {
             result = true;
         },
@@ -307,7 +306,7 @@ function checkPart(id, count) {
 }
 
 
-function postMaintenance(AircraftId,today) {
+function postMaintenance(AircraftId, today) {
     $.ajax({
         type: "POST",
         url: uri + "api/maintenance/create",

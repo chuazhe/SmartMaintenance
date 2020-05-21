@@ -133,7 +133,7 @@ function getAircraftCount() {
         type: "GET",
         url: uri + "api/aircraft",
         cache: false,
-        async:false,
+        async: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
             console.log(jqXHR);
@@ -281,7 +281,7 @@ function getAircraftMaintenanceCount() {
         },
         success: function (data) {
             var j = 0;
-            
+
 
             for (var i = 0; i < data.length; i++) {
                 if (data[i].aircraftStatus == 0) {

@@ -12,7 +12,7 @@ function getPlan(AircraftId) {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/Maintenance/getUnused/"+AircraftId,
+        url: uri + "api/Maintenance/getUnused/" + AircraftId,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Something went wrong!");
@@ -26,7 +26,7 @@ function getPlan(AircraftId) {
 
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row data-href=" + web + "Plan/confirm/" + data[i].maintenanceId + ">";
-                tr = tr + "<td>" +"MP"+ data[i].maintenanceId + "</td>";
+                tr = tr + "<td>" + "MP" + data[i].maintenanceId + "</td>";
                 tr = tr + "<td>" + data[i].maintenanceDate + "</td>";
 
             }

@@ -24,7 +24,7 @@ function getPart() {
 
             for (var i = 0; i < data.length; i++) {
                 tr = tr + "<tr class=table-row>";
-                tr = tr + "<td>" +"PT"+ data[i].partId + "</td>";
+                tr = tr + "<td>" + "PT" + data[i].partId + "</td>";
                 tr = tr + "<td>" + data[i].partName + "</td>";
                 tr = tr + "<td>" + data[i].partCount + "</td>";
 

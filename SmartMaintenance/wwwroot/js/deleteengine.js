@@ -38,7 +38,7 @@ function getEnginePart() {
 
     $.ajax({
         type: "GET",
-        url: uri + "api/enginepart/getspecific/"+id,
+        url: uri + "api/enginepart/getspecific/" + id,
         cache: false,
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);

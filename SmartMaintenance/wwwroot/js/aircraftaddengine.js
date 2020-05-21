@@ -17,7 +17,7 @@ $(document).ready(function ($) {
 
     // array = [2, 9]
     console.log(allId);
-    
+
     var name;
 
     for (let i = 0; i < allId.length; i++) {
@@ -29,7 +29,7 @@ $(document).ready(function ($) {
     $('#SelectPartName').html(items);
 
     setDropdown();
-    
+
 
 });
 

@@ -42,7 +42,7 @@
 
 function createPurchaseOrder() {
 
-    if (document.getElementById("productTable").rows.length!=1) {
+    if (document.getElementById("productTable").rows.length != 1) {
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -73,7 +73,7 @@ function postOrder(today) {
         url: uri + "api/order/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({"OrderDate":today,"OrderApprove":"0"}),
+        data: JSON.stringify({ "OrderDate": today, "OrderApprove": "0" }),
         error: function (jqXHR, textStatus, errorThrown) {
         },
         success: function (result) {
@@ -104,7 +104,7 @@ function getTopId() {
 
 };
 
-function postOrderPart(OrderId,PartId,Count) {
+function postOrderPart(OrderId, PartId, Count) {
     $.ajax({
         type: "POST",
         url: uri + "api/orderpart/create",
@@ -126,8 +126,7 @@ function productAddToTable() {
 
     var quantity = $('#quantity').val();
 
-    if (quantity != 0 && res!="Sele")
-    {
+    if (quantity != 0 && res != "Sele") {
         var x = document.getElementById("productTable").rows.length;
         $("#productTable tbody").append(
             "<tr>" +
@@ -157,7 +156,7 @@ function productDelete(ctl) {
 
 function getPartName() {
 
-    var items="";
+    var items = "";
 
     $.ajax({
         type: "GET",
@@ -173,7 +172,7 @@ function getPartName() {
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i].partName);
-                items += "<li class='dropdown-item'><a >"+ data[i].partId +" "+data[i].partName+"</a ></li>";  
+                items += "<li class='dropdown-item'><a >" + data[i].partId + " " + data[i].partName + "</a ></li>";
                 //console.log(items);
 
             }

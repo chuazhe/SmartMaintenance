@@ -23,12 +23,11 @@
     });
 });
 
-function AddPart()
-{
+function AddPart() {
     var txt = $("#partName").val();
-    var quantity = $('#quantity').val(); 
+    var quantity = $('#quantity').val();
 
-    postPart(txt,quantity);
+    postPart(txt, quantity);
 
 
 }
@@ -51,7 +50,7 @@ function postPart(PartName, Count) {
         },
         success: function (result) {
             alertify.success("New Part is created!");
-           // console.log("Good!");
+            // console.log("Good!");
         }
     });
 };

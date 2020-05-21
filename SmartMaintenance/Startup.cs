@@ -43,7 +43,8 @@ options.UseSqlServer(
 Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
 
             //used the AddIdentity method to set up the Identity services using the built-in classes to represent users and roles.
-            services.AddIdentity<AppUser, IdentityRole>(opts => {
+            services.AddIdentity<AppUser, IdentityRole>(opts =>
+            {
                 opts.User.RequireUniqueEmail = true;
                 //opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 //opts.Password.RequiredLength = 6;

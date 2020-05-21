@@ -18,12 +18,11 @@ $(document).ready(function ($) {
     deleteDuplicateValues(nameArr);
 
 
-    for (let i = 0; i < part.length; i++)
-    {
+    for (let i = 0; i < part.length; i++) {
         console.log(part[i]);
-    tr = tr + "<tr class=table-row>";
-    tr = tr + "<td>" + part[i] + "</td>";
-    var name = getPartName(part[i]);
+        tr = tr + "<tr class=table-row>";
+        tr = tr + "<td>" + part[i] + "</td>";
+        var name = getPartName(part[i]);
         tr = tr + "<td>" + name + "</td>";
         tr = tr + "<td>" + quantity[i] + "</td>";
         tr = tr + "<td style='width:20%'><button type='button' onclick='productDelete(this)' class='btn btn-default'><span class='fa fa-window-close fa-2x' /></button>";
@@ -98,8 +97,8 @@ function productAddToTable() {
             "</td>" +
             "<td style='width:30%'>" + name +
             "</td>" +
-            "<td style='width:20%'>" + quantity +"</td>"+
-            "<td style='width:20%'>"+ "<button type='button'" +
+            "<td style='width:20%'>" + quantity + "</td>" +
+            "<td style='width:20%'>" + "<button type='button'" +
             "onclick='productDelete(this);' " +
             "class='btn btn-default'>" +
             "<span class='fa fa-window-close fa-2x' />" +
@@ -196,7 +195,7 @@ async function createMaintenancePlan() {
 
     }
 
-    if (result==1 && finalresult==1) {
+    if (result == 1 && finalresult == 1) {
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

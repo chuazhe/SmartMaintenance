@@ -8,8 +8,7 @@ $(document).ready(function ($) {
     getEnginePart();
     getPart();
 
-    for (let i = 0; i < myId.length; i++)
-    {
+    for (let i = 0; i < myId.length; i++) {
         const index = allId.indexOf(myId[i]);
         if (index > -1) {
             allId.splice(index, 1);
@@ -22,10 +21,9 @@ $(document).ready(function ($) {
 
     var name;
 
-    for (let i = 0; i<allId.length; i++)
-    {
-      name = getPartName(allId[i]);
-      items += "<li class='dropdown-item'><a >" + allId[i] + " " + name + "</a ></li>";
+    for (let i = 0; i < allId.length; i++) {
+        name = getPartName(allId[i]);
+        items += "<li class='dropdown-item'><a >" + allId[i] + " " + name + "</a ></li>";
 
     }
 
@@ -107,7 +105,7 @@ function postEnginePart(EngineId, PartId) {
         url: uri + "api/enginepart/create",
         contentType: "application/json",
         async: false,
-        data: JSON.stringify({ "EngineId": EngineId, "PartId": PartId}),
+        data: JSON.stringify({ "EngineId": EngineId, "PartId": PartId }),
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
             console.log(textStatus);
