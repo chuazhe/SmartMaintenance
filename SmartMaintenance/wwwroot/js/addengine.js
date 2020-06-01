@@ -34,14 +34,19 @@ $(document).ready(function ($) {
 
 });
 
-function createPurchaseOrder() {
+function postEnginePart2() {
 
     var id = $('#routeDataId').val();
 
     var str = $('#dropdown').text();
     var res = str.substring(0, 4); //id
+    if (isNaN(res)) {
+        alert("You did not select any engine part!");
 
-    postEnginePart(id, res);
+    }
+    else {
+        postEnginePart(id, res);
+    }
 }
 
 
@@ -107,6 +112,7 @@ function postEnginePart(EngineId, PartId) {
         async: false,
         data: JSON.stringify({ "EngineId": EngineId, "PartId": PartId }),
         error: function (jqXHR, textStatus, errorThrown) {
+            alert("You did not select any engine part!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);

@@ -15,7 +15,13 @@ function generatePlan() {
 
     console.log(allId);
 
-    localStorage.setItem("id", JSON.stringify(allId));
+    if (allId.length == 0) {
+        alert("No aircraft is predicted to fail!");
+    }
+    else {
+        localStorage.setItem("id", JSON.stringify(allId));
+    }
+
 
 }
 
@@ -103,38 +109,46 @@ function makePrediction() {
     var s20 = document.getElementById("s20").value;
     var s21 = document.getElementById("s21").value;
 
-    var str = $('#dropdown').text();
-    var res = str.substring(0, 4);
-    if (isNaN(res)) {
-        res = null;
-    }
+    console.log(setting1);
 
-    $.ajax({
-        type: "GET",
-        url: uri + "api/notifications/predict/" + setting1 + "/" + setting2 + "/" + setting3 + "/" + s1 + "/" + s2 + "/" + s3 + "/" + s4 + "/" + s5 +
-            "/" + s6 + "/" + s7 + "/" + s8 + "/" + s9 + "/" + s10 + "/" + s11 + "/" + s12 + "/" + s13 + "/" + s14 + "/" + s15 + "/" + s16 + "/" + s17
-            + "/" + s18 + "/" + s19 + "/" + s20 + "/" + s21 + "/" + res,
-        error: function (jqXHR, textStatus, errorThrown) {
-            //alert("Something went wrong!");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (result) {
-            console.log(result);
-            init = result.indexOf('[');
-            fin = result.indexOf(']');
-            var obj = result.substr(init + 1, fin - init - 1);
-            console.log(obj);
-            document.getElementById("result").innerHTML = obj;
+    if (!isNaN(setting1) && !isNaN(setting2) && !isNaN(setting3) && !isNaN(s1) && !isNaN(s2) && !isNaN(s3) && !isNaN(s4) && !isNaN(s5) && !isNaN(s6) && !isNaN(s7) && !isNaN(s8) && !isNaN(s9) && !isNaN(s10) && !isNaN(s11) && !isNaN(s12) && !isNaN(s13) && !isNaN(s14) && !isNaN(s15) && !isNaN(s16) && !isNaN(s17) && !isNaN(s18) && !isNaN(s19) && !isNaN(s20) && !isNaN(s21)) {
 
-            console.log(res);
-            let abc = parseInt($('#routeDataId').val());
-            checkRUL2(obj, abc);
-
+        var str = $('#dropdown').text();
+        var res = str.substring(0, 4);
+        if (isNaN(res)) {
+            res = null;
         }
-    });
 
+        $.ajax({
+            type: "GET",
+            url: uri + "api/notifications/predict/" + setting1 + "/" + setting2 + "/" + setting3 + "/" + s1 + "/" + s2 + "/" + s3 + "/" + s4 + "/" + s5 +
+                "/" + s6 + "/" + s7 + "/" + s8 + "/" + s9 + "/" + s10 + "/" + s11 + "/" + s12 + "/" + s13 + "/" + s14 + "/" + s15 + "/" + s16 + "/" + s17
+                + "/" + s18 + "/" + s19 + "/" + s20 + "/" + s21 + "/" + res,
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Something went wrong!");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (result) {
+                console.log(result);
+                init = result.indexOf('[');
+                fin = result.indexOf(']');
+                var obj = result.substr(init + 1, fin - init - 1);
+                console.log(obj);
+                document.getElementById("result").innerHTML = obj;
+
+                console.log(res);
+                let abc = parseInt($('#routeDataId').val());
+                checkRUL2(obj, abc);
+
+            }
+        });
+    }
+    else {
+        alert("Please enter only number for all the input!");
+
+    }
 
 }
 

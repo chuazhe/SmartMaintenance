@@ -147,9 +147,6 @@ body {
     font-size: 1.2rem;
 }
 
-{
-    box-sizing: border-box;
-}
 
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {

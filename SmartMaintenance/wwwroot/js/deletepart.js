@@ -1,4 +1,6 @@
-﻿$(document).ready(function ($) {
+﻿var result2 = 0;
+
+$(document).ready(function ($) {
 
 
     getPartName();
@@ -14,14 +16,28 @@ function DeletePart() {
 
     console.log(res);
 
-    postPart(res);
+    if (isNaN(res)) {
+        alert("You did not select any engine part!");
 
+    }
+    else {
+        result2 = 0;
+        checkEngine(res);
+        checkMaintenance(res);
+        checkOrder(res);
+        if (result2 == 0) {
+            postPart(res);
+        }
+        else {
+            alert("The part is still remain in the system! Please delete all the relevant data first!");
+        }
+    }
 
 }
 
 function postPart(PartId) {
     $.ajax({
-        type: "POST",
+        type: "DELETE",
         url: uri + "api/part/delete/" + PartId,
         contentType: "application/json",
         async: false,
@@ -82,3 +98,72 @@ function setDropdown() {
         //console.log(res);
     });
 }
+
+function checkEngine(PartId) {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/enginepart/getspecificcount/" + PartId,
+        contentType: "application/json",
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+
+            /*
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            */
+        },
+        success: function (result) {
+            result2 += result;
+            //alertify.success("New Part is created!");
+            // console.log("Good!");
+        }
+    });
+};
+
+function checkMaintenance(PartId) {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/maintenancepart/getspecificcount/" + PartId,
+        contentType: "application/json",
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+
+            /*
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            */
+        },
+        success: function (result) {
+            result2 += result;
+            //alertify.success("New Part is created!");
+            // console.log("Good!");
+        }
+    });
+};
+
+function checkOrder(PartId) {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/orderpart/getspecificcount/" + PartId,
+        contentType: "application/json",
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+
+            /*
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            */
+        },
+        success: function (result) {
+            result2 += result;
+            //alertify.success("New Part is created!");
+            // console.log("Good!");
+        }
+    });
+};

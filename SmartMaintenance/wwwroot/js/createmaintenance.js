@@ -169,6 +169,9 @@ async function createMaintenancePlan() {
 
         }
     }
+    else {
+        alert("The maintenance plan is empty!");
+    }
 
 }
 

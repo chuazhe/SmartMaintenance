@@ -11,22 +11,31 @@ function postEnginePart() {
 
     var str = $('#dropdown').text();
     var res = str.substring(0, 4); //id
+    //console.log(res);
 
-    $.ajax({
-        type: "POST",
-        url: uri + "api/enginepart/delete",
-        contentType: "application/json",
-        async: false,
-        data: JSON.stringify({ "EngineId": id, "PartId": res }),
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (result) {
-            //console.log("Good!");
-        }
-    });
+    if (isNaN(res)) {
+        alert("You did not select any engine part!");
+
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: uri + "api/enginepart/delete",
+            contentType: "application/json",
+            async: false,
+            data: JSON.stringify({ "EngineId": id, "PartId": res }),
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (result) {
+                //console.log("Good!");
+            }
+        });
+    }
+
+
 };
 
 function getEnginePart() {

@@ -1,4 +1,6 @@
-﻿$(document).ready(function ($) {
+﻿var result2 = 0;
+
+$(document).ready(function ($) {
 
     $('#add').click(function (e) {
 
@@ -27,10 +29,22 @@ function AddPart() {
     var txt = $("#partName").val();
     var quantity = $('#quantity').val();
 
-    postPart(txt, quantity);
+    if (quantity != 0 && !isEmptyOrSpaces(txt)) {
+        checkName(txt);
+        if (result2 == 0) {
+            postPart(txt, quantity);
+        }
+        else {
+            alert("Please enter another name for the part!");
 
+        }
+    }
+    else {
+        alert("Please enter the name and quantity for the part!");
+    }
 
 }
+
 
 function postPart(PartName, Count) {
     $.ajax({
@@ -50,6 +64,29 @@ function postPart(PartName, Count) {
         },
         success: function (result) {
             alertify.success("New Part is created!");
+            // console.log("Good!");
+        }
+    });
+};
+
+function checkName(PartName) {
+    $.ajax({
+        type: "GET",
+        url: uri + "api/part/getspecificpartname/"+PartName,
+        contentType: "application/json",
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Something went wrong!");
+
+            /*
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            */
+        },
+        success: function (result) {
+            result2 = result;
+            //alertify.success("New Part is created!");
             // console.log("Good!");
         }
     });

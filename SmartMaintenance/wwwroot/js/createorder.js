@@ -63,6 +63,9 @@ function createPurchaseOrder() {
         }
         alertManager(Id);
     }
+    else {
+        alert("The purchase order is empty!");
+    }
 
 
 }

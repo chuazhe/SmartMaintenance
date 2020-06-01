@@ -40,7 +40,14 @@ function createPurchaseOrder() {
     var str = $('#dropdown').text();
     var res = str.substring(0, 4); //id
 
-    postAircraftEngine(id, res);
+
+    if (isNaN(res)) {
+        alert("You did not select any engine!");
+
+    }
+    else {
+        postAircraftEngine(id, res);
+    }
 
 
 

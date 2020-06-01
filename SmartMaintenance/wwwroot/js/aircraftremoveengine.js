@@ -15,21 +15,29 @@ function postAircraftEngine() {
     var str = $('#dropdown').text();
     var res = str.substring(0, 4); //id
 
-    $.ajax({
-        type: "POST",
-        url: uri + "api/aircraftengine/delete",
-        contentType: "application/json",
-        async: false,
-        data: JSON.stringify({ "AircraftId": id, "EngineId": res }),
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        success: function (result) {
-            //console.log("Good!");
-        }
-    });
+
+    if (isNaN(res)) {
+        alert("You did not select any engine!");
+
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: uri + "api/aircraftengine/delete",
+            contentType: "application/json",
+            async: false,
+            data: JSON.stringify({ "AircraftId": id, "EngineId": res }),
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (result) {
+                //console.log("Good!");
+            }
+        });    }
+
+
 };
 
 function getAircraftEngine() {

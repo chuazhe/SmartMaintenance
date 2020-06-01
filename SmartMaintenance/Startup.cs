@@ -13,8 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmartMaintenance.Helpers;
 using SmartMaintenance.Models;
+/*
 using Hangfire;
 using Hangfire.SqlServer;
+*/
 using System.Diagnostics;
 
 namespace SmartMaintenance
@@ -85,6 +87,8 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
+            /*
+
             // Add Hangfire services.
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
@@ -99,16 +103,17 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
                     UsePageLocksOnDequeue = true,
                     DisableGlobalLocks = true
                 }));
+            */
 
             // Add the processing server as IHostedService
-            services.AddHangfireServer();
+            // services.AddHangfireServer();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -127,7 +132,8 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
             app.UseSession();
             app.UseCookiePolicy();
 
-            app.UseHangfireDashboard();
+            //Hangfire
+            //app.UseHangfireDashboard();
 
 
             app.UseMvc(routes =>

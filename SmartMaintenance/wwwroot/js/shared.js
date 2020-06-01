@@ -1,6 +1,13 @@
 ﻿
 const web = "https://localhost:44300/";
+
 const uri = "http://localhost:4000/";
+
+
+/*
+// Use https
+const uri = "https://ae937e9465af.ngrok.io/";
+*/
 
 
 /*Menu Toggle Script*/
@@ -52,4 +59,9 @@ function checkRUL(RUL, AircraftId) {
         sendNotification(msg, 0);
         alertify.error(msg);
     }
+}
+
+
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
 }
