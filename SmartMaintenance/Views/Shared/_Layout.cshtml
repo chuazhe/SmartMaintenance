@@ -51,7 +51,7 @@
         <div class="bg-dark border-right border-dark" id="sidebar-wrapper">
             <div class="sidebar-heading bg-primary font-weight-bold">SmartMaintenance</div>
             <div id="navigator" class="list-group list-group-flush">
-
+                @if(User.IsInRole("User") || User.IsInRole("Admin") || User.IsInRole("Manager")) { 
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a id="Home" href="https://localhost:44300/Home" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-home fa-fw" aria-hidden="true"></i>  Home</a>
@@ -74,6 +74,7 @@
                     <a id="Engine" href="https://localhost:44300/Engine" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>  Engine</a>
                     <a data-alias="Some Alias Here" class="list-group-item list-group-item-action bg-dark"></a>
 
+                }
                 }
             </div>
         </div>

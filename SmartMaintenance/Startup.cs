@@ -126,7 +126,7 @@ Configuration["Data:SmartMaintenanceIdentity:ConnectionString"]));
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseSession();

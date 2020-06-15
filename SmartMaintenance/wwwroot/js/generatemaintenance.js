@@ -177,49 +177,56 @@ function setDropdown() {
 
 async function createMaintenancePlan() {
 
-    var id = $('#routeDataId').val();
-
-    var result = 1;
-    var finalresult = 1;
+    if (document.getElementById("tableMaintenancePart").rows.length != 1) {
 
 
-    var table = document.getElementById('tableMaintenancePart');
-    for (var r = 1, n = table.rows.length; r < n; r++) {
-        var res = table.rows[r].cells[0].innerHTML;
-        //var quantity = table.rows[r].cells[2].innerHTML;
-        result = checkPart(res, 1);
-        if (result == 0) {
-            prompt(res);
-            finalresult = 0;
-        }
+        var id = $('#routeDataId').val();
 
-    }
+        var result = 1;
+        var finalresult = 1;
 
-    if (result == 1 && finalresult == 1) {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-
-        today = dd + '-' + mm + '-' + yyyy;
-
-        postMaintenance(id, today);
-
-        var Id = getTopId();
 
         var table = document.getElementById('tableMaintenancePart');
         for (var r = 1, n = table.rows.length; r < n; r++) {
             var res = table.rows[r].cells[0].innerHTML;
-            var quantity = table.rows[r].cells[2].innerHTML;
-
-            postMaintenancePart(Id, res, quantity);
-
-            //alertManager(Id);
+            //var quantity = table.rows[r].cells[2].innerHTML;
+            result = checkPart(res, 1);
+            if (result == 0) {
+                prompt(res);
+                finalresult = 0;
+            }
 
         }
-    }
 
-    //var second = document.getElementById("seconds").value;
+        if (result == 1 && finalresult == 1) {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = dd + '-' + mm + '-' + yyyy;
+
+            postMaintenance(id, today);
+
+            var Id = getTopId();
+
+            var table = document.getElementById('tableMaintenancePart');
+            for (var r = 1, n = table.rows.length; r < n; r++) {
+                var res = table.rows[r].cells[0].innerHTML;
+                var quantity = table.rows[r].cells[2].innerHTML;
+
+                postMaintenancePart(Id, res, quantity);
+
+                //alertManager(Id);
+
+            }
+        }
+
+        //var second = document.getElementById("seconds").value;
+    }
+    else {
+        alert("The maintenance plan is empty!");
+    }
 
 }
 
