@@ -14,12 +14,14 @@
         <tr><th>Engine Id</th><th>Engine Name</th></tr>
     </table>
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/manual/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-hand-paper" id="predictManual"></i><br />Manual Prediction</a>
         </div>
-        <div class="col-6">
-            <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/generate/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-robot" id="predictAuto" onclick="autoPredict()"></i><br />Auto Prediction (Demo only)</a>
-        </div>
+        <!--
+    <div class="col-6">
+        <a class="btn btn-primary btn-block btn-lg" href="https://localhost:44300/aircraft/generate/@(ViewContext.RouteData.Values["Id"])"><i class="fa fa-10x fa-robot" id="predictAuto" onclick="autoPredict()"></i><br />Auto Prediction (Demo only)</a>
+    </div>
+        -->
     </div>
 
     <div class="row">
