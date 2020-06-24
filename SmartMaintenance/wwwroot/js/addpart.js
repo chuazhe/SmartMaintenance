@@ -31,6 +31,7 @@ function AddPart() {
 
     if (quantity != 0 && !isEmptyOrSpaces(txt)) {
         checkName(txt);
+        result2 = true;
         if (result2 == 0) {
             postPart(txt, quantity);
         }

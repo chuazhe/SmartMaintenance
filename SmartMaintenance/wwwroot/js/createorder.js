@@ -61,7 +61,7 @@ function createPurchaseOrder() {
             var quantity = table.rows[r].cells[2].innerHTML;
             postOrderPart(Id, res, quantity);
         }
-        alertManager(Id);
+        //alertManager(Id);
     }
     else {
         alert("The purchase order is empty!");
@@ -93,7 +93,7 @@ function getTopId() {
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
+            //alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
@@ -167,7 +167,7 @@ function getPartName() {
         cache: false,
         async: false,
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
+            //alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);

@@ -35,7 +35,7 @@ function sendNotification(x, value) {
         async: false,
         data: JSON.stringify({ "msg": x, "manager": value }),
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Something went wrong!");
+            //alert("Something went wrong!");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
